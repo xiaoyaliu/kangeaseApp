@@ -56,14 +56,12 @@ export default class LaunchImage extends Component{
 													<View>
 														  <TextInput onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
 													</View>
-
 													{this.renderNameClear()}
 											  </View>
 											  <View style={{marginTop:10}}>
 													<View>
 														  <TextInput onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
 													</View>
-
 													{this.renderPwdClear()}
 											  </View>
 										</View>
