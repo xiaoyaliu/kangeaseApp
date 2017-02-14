@@ -37,20 +37,37 @@ export default class LaunchImage extends Component{
 						  </View>
 						  <View style={styles.LoginView}>
 								<Text style={styles.error}>您输入的用户名或密码不正确</Text>
-								<View style={{marginTop:10}}>
-									  <View>
-									   <TextInput selectionColor="#ffffff" clearButtonMode="while-editing" onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
+								{Platform.OS=='ios'?
+								<View>
+									  <View style={{marginTop:10}}>
+											<View>
+											 <TextInput clearButtonMode="while-editing" onChangeText ={(value)=>this.setState({nameValue:value})} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8"/>
+											</View>
+
 									  </View>
-									  {/*姓名清空按钮*/}
-									  {this.renderNameClear()}
-								</View>
-								<View style={{marginTop:10}}>
-									  <View>
-									    <TextInput onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
+									  <View style={{marginTop:10}}>
+											<View>
+											  <TextInput clearButtonMode="while-editing" onChangeText ={(value)=>this.setState({pwdValue:value})} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} />
+											</View>
 									  </View>
-									  {/*姓名密码按钮*/}
-									  {this.renderPwdClear()}
-								</View>
+								</View>:
+										<View>
+											  <View style={{marginTop:10}}>
+													<View>
+														  <TextInput onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
+													</View>
+
+													{this.renderNameClear()}
+											  </View>
+											  <View style={{marginTop:10}}>
+													<View>
+														  <TextInput onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
+													</View>
+
+													{this.renderPwdClear()}
+											  </View>
+										</View>
+									  }
 								<View style={{height:20,marginTop:10}}>
 									  <TouchableOpacity style={styles.forgetPwd} onPress={this._jump.bind(this,ForgetPwd , "忘记密码")}>
 											<Text style={{color:"#ffffff",fontSize:12}}>忘记密码?</Text>
