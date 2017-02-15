@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
 	  container:{
 			backgroundColor:"#fff",
 			alignItems:'center',
-			height:Platform.OS==='ios'?64:44,
+			height:44,
+			paddingTop:Platform.OS==='ios'?20:0,
 			justifyContent:'center',
 			borderBottomWidth:1,
 			borderBottomColor:'#d4d4d4'
