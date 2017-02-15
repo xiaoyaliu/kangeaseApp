@@ -14,7 +14,7 @@ import {
 		} from 'react-native';
 
 import Util from './../Common/util';
-
+import Nav from './../Common/navComponent';
 export default class LaunchImage extends Component{
 	  constructor(props) {
 			super(props);
@@ -23,9 +23,13 @@ export default class LaunchImage extends Component{
 	  render() {
 			return (
 					<View style={styles.container}>
-
-									  <Text>注册</Text>
-
+						  <Nav title="注册" navigator={this.props.navigator}/>
+						  <View>
+						     <View style={styles.ViewItem}>
+							       <Text></Text>
+								   <TextInput underlineColorAndroid='transparent'/>
+							 </View>
+						  </View>
 					</View>
 			);
 	  }
@@ -33,7 +37,11 @@ export default class LaunchImage extends Component{
 }
 const styles = StyleSheet.create({
 	  container:{
-			flex:1
+			flex:1,
+			backgroundColor:"#f1f1f1"
+	  },
+	  ViewItem:{
+			height:Platform.OS==='ios'?50:44
 	  }
 
 });
