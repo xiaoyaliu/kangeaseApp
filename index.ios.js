@@ -6,48 +6,30 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+        AppRegistry,
+        StyleSheet,
+        Text,
+        View,
+        Navigator
+        } from 'react-native';
 
-export default class kangeaseApp extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
+import LaunchPage from './Component/Main/XMGLauchpage'
+//var Main=require('./Component/Main/XMGMain')
+class XMGStart extends Component{
+  render(){
+    return(
+            <Navigator
+                    initialRoute={{name: "启动页", component: LaunchPage}}
+                    configureScene={()=>{return Navigator.SceneConfigs.VerticalUpSwipeJump}}
+                    renderScene={(route, navigator) =>{
+                               let Component=route.component;
+                               return <Component {...route.passProps} navigator={navigator}/>
+                            }
+                           }
+                    />
+    )
   }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('kangeaseApp', () => kangeaseApp);
+AppRegistry.registerComponent('kangeaseApp', () => XMGStart);
