@@ -14,7 +14,7 @@ import {
         } from 'react-native';
 
 import LaunchPage from './Component/Main/XMGLauchpage'
-//var Main=require('./Component/Main/XMGMain')
+var Main=require('./Component/Main/XMGMain')
 class XMGStart extends Component{
   render(){
     return(
