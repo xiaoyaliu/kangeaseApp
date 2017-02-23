@@ -1,0 +1,55 @@
+{
+  "flag":true,
+  "msg":"修改成功",
+  "info":{
+    "allcart":
+      [
+        { "rec_id":"33344",
+        "goods_id":"154",
+          "goods_name":"翔宇红衣 复方红衣补血口服液 补气补血 缺铁性贫血",
+          "goods_img":"http://img.youde.com/images/goods/20150915/16e79e148218c0afc8b81775c66cf2f1145359ul6e69.png",
+          "goods_price":"33.00",
+          "goods_number":"1",
+          "flag":"1",
+          "total":33,
+          "isInorder":1
+          },
+        { "rec_id":"33344",
+          "goods_id":"154",
+          "goods_name":"翔宇红衣 复方红衣补血口服液 补气补血 缺铁性贫血",
+          "goods_img":"http://img.youde.com/images/goods/20150915/16e79e148218c0afc8b81775c66cf2f1145359ul6e69.png",
+          "goods_price":"33.00",
+          "goods_number":"1",
+          "flag":"1",
+          "total":33,
+          "isInorder":1
+        },
+        { "rec_id":"33344",
+          "goods_id":"154",
+          "goods_name":"翔宇红衣 复方红衣补血口服液 补气补血 缺铁性贫血",
+          "goods_img":"http://img.youde.com/images/goods/20150915/16e79e148218c0afc8b81775c66cf2f1145359ul6e69.png",
+          "goods_price":"33.00",
+          "goods_number":"1",
+          "flag":"1",
+          "total":33,
+          "isInorder":1
+        },
+        { "rec_id":"33344",
+          "goods_id":"154",
+          "goods_name":"翔宇红衣 复方红衣补血口服液 补气补血 缺铁性贫血",
+          "goods_img":"http://img.youde.com/images/goods/20150915/16e79e148218c0afc8b81775c66cf2f1145359ul6e69.png",
+          "goods_price":"33.00",
+          "goods_number":"1",
+          "flag":"1",
+          "total":33,
+          "isInorder":1
+        }
+      ]
+    ,
+    "cartInfo":{
+      "totalNum":1,
+      "totalPrice":"33.00",
+      "allGoodsNum":1
+    }
+  }
+}

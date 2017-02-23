@@ -1,0 +1,484 @@
+{
+  "info": [
+    {
+      "is_otc": "0",
+      "goods_id": "1",
+      "goods_img": "http://img.youde.com/images/goods/20151224/f3ccdd27d2000e3f9255a7e3e2c488001730352f1yde.jpg",
+      "market_price": "24.00",
+      "shop_price": "16.00",
+      "num": "6",
+      "goods_name": "复方氨酚烷胺片",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "2",
+      "goods_img": "http://img.youde.com/images/goods/20151202/f3ccdd27d2000e3f9255a7e3e2c48800103622wpt1gg.jpg",
+      "market_price": "11.00",
+      "shop_price": "9.20",
+      "num": "10",
+      "goods_name": "酚咖片",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "13",
+      "goods_img": "http://img.youde.com/images/goods/20150910/16e79e148218c0afc8b81775c66cf2f1yydm4m.png",
+      "market_price": "21.40",
+      "shop_price": "16.50",
+      "num": "9",
+      "goods_name": "布洛芬缓释胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "14",
+      "goods_img": "http://img.youde.com/images/goods/20150910/16e79e148218c0afc8b81775c66cf2f1jjoi7z.png",
+      "market_price": "21.90",
+      "shop_price": "12.60",
+      "num": "2",
+      "goods_name": "连花清瘟胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "38",
+      "goods_img": "http://img.youde.com/images/goods/20151224/f3ccdd27d2000e3f9255a7e3e2c488001725141qh95l.jpg",
+      "market_price": "15.00",
+      "shop_price": "10.50",
+      "num": "341",
+      "goods_name": "感冒灵颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "87",
+      "goods_img": "http://img.youde.com/images/goods/20150911/fcb98a8b74042a09e280825c44a54f30182933vljz3y.jpg",
+      "market_price": "15.00",
+      "shop_price": "13.50",
+      "num": "1",
+      "goods_name": "藿香正气滴丸",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "92",
+      "goods_img": "http://img.youde.com/images/goods/20150912/3955f404e6f81af2693d4180b72bd3701022431445gg.jpg",
+      "market_price": "23.00",
+      "shop_price": "14.50",
+      "num": null,
+      "goods_name": "广东凉茶颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "96",
+      "goods_img": "http://img.youde.com/images/goods/20151202/f3ccdd27d2000e3f9255a7e3e2c48800104150m0sdwa.jpg",
+      "market_price": "15.40",
+      "shop_price": "9.90",
+      "num": "2",
+      "goods_name": "小儿感冒颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "226",
+      "goods_img": "http://img.youde.com/images/goods/20150916/4a47a0db6e60853dedfcfdf08a5ca2491122517yg3i3.png",
+      "market_price": "25.00",
+      "shop_price": "13.90",
+      "num": "6",
+      "goods_name": "板蓝根颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "235",
+      "goods_img": "http://img.youde.com/images/goods/20150916/4a47a0db6e60853dedfcfdf08a5ca249114120btci11.png",
+      "market_price": "4.00",
+      "shop_price": "2.50",
+      "num": null,
+      "goods_name": "对乙酰氨基酚栓",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "240",
+      "goods_img": "http://img.youde.com/images/goods/20151224/4a47a0db6e60853dedfcfdf08a5ca249174510m5mr5k.png",
+      "market_price": "10.00",
+      "shop_price": "8.80",
+      "num": "1",
+      "goods_name": "复方氨酚烷胺胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "241",
+      "goods_img": "http://img.youde.com/images/goods/20150916/4a47a0db6e60853dedfcfdf08a5ca2491156068q30t6.png",
+      "market_price": "14.00",
+      "shop_price": "6.50",
+      "num": "18",
+      "goods_name": "复方板蓝根颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "242",
+      "goods_img": "http://img.youde.com/images/goods/20151224/f3ccdd27d2000e3f9255a7e3e2c48800172842timivu.jpg",
+      "market_price": "21.00",
+      "shop_price": "15.00",
+      "num": "13",
+      "goods_name": "复方板蓝根颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "248",
+      "goods_img": "http://img.youde.com/images/goods/20150916/65e11a061e85c4b9367a6477bb08a6ba1420248mm1gs.png",
+      "market_price": "7.20",
+      "shop_price": "6.20",
+      "num": null,
+      "goods_name": "感冒灵颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "249",
+      "goods_img": "http://img.youde.com/images/goods/20150916/4a47a0db6e60853dedfcfdf08a5ca249142152g87405.png",
+      "market_price": "9.80",
+      "shop_price": "8.50",
+      "num": null,
+      "goods_name": "感冒清片",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "277",
+      "goods_img": "http://img.youde.com/images/goods/20150917/10fb15c77258a991b0028080a64fb42d0913554cwo3d.png",
+      "market_price": "25.00",
+      "shop_price": "9.00",
+      "num": "1",
+      "goods_name": "小儿氨酚黄那敏颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "326",
+      "goods_img": "http://img.youde.com/images/goods/20150918/16e79e148218c0afc8b81775c66cf2f1165009b4shf8.png",
+      "market_price": "23.00",
+      "shop_price": "20.60",
+      "num": "2",
+      "goods_name": "蜜炼川贝枇杷膏",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "335",
+      "goods_img": "http://img.youde.com/images/goods/20150918/91dccdccb29cffc18f93e9d5bf02a17d170932adcaoo.png",
+      "market_price": "33.00",
+      "shop_price": "14.70",
+      "num": null,
+      "goods_name": "咳速停糖浆",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "336",
+      "goods_img": "http://img.youde.com/images/goods/20150918/a90a35956f897465b066f805153a6ab5171150zhi7pj.png",
+      "market_price": "45.00",
+      "shop_price": "16.00",
+      "num": "2",
+      "goods_name": "咳速停糖浆",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "524",
+      "goods_img": "http://img.youde.com/images/goods/20151012/16e79e148218c0afc8b81775c66cf2f1095725xuim79.png",
+      "market_price": "22.00",
+      "shop_price": "16.70",
+      "num": null,
+      "goods_name": "抗感颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "612",
+      "goods_img": "http://img.youde.com/images/goods/20151029/f3ccdd27d2000e3f9255a7e3e2c48800110915gyense.jpg",
+      "market_price": "41.00",
+      "shop_price": "27.00",
+      "num": "1",
+      "goods_name": "寒喘祖帕颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "618",
+      "goods_img": "http://img.youde.com/images/goods/20151029/f3ccdd27d2000e3f9255a7e3e2c488001124459cyoko.jpg",
+      "market_price": "42.00",
+      "shop_price": "31.00",
+      "num": "13",
+      "goods_name": "川贝枇杷胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "630",
+      "goods_img": "http://img.youde.com/images/goods/20151030/f3ccdd27d2000e3f9255a7e3e2c488000950328za4zb.jpg",
+      "market_price": "12.00",
+      "shop_price": "8.50",
+      "num": "27",
+      "goods_name": "感冒清热颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "669",
+      "goods_img": "http://img.youde.com/images/goods/20151102/f3ccdd27d2000e3f9255a7e3e2c488000942497fxbrs.jpg",
+      "market_price": "22.30",
+      "shop_price": "18.60",
+      "num": "1",
+      "goods_name": "小儿清热止咳口服液",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "671",
+      "goods_img": "http://img.youde.com/images/goods/20151102/f3ccdd27d2000e3f9255a7e3e2c48800094802y00ou5.jpg",
+      "market_price": "40.00",
+      "shop_price": "18.00",
+      "num": "10",
+      "goods_name": "小儿双清颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "687",
+      "goods_img": "http://img.youde.com/images/goods/20151102/f3ccdd27d2000e3f9255a7e3e2c48800175202irgg9b.jpg",
+      "market_price": "16.00",
+      "shop_price": "12.50",
+      "num": null,
+      "goods_name": "愈美颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "721",
+      "goods_img": "http://img.youde.com/images/goods/20151104/f3ccdd27d2000e3f9255a7e3e2c48800174015ag2wlq.jpg",
+      "market_price": "30.00",
+      "shop_price": "24.00",
+      "num": null,
+      "goods_name": "感冒解毒颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "782",
+      "goods_img": "http://img.youde.com/images/goods/20151109/f3ccdd27d2000e3f9255a7e3e2c48800170945qrglsr.jpg",
+      "market_price": "7.80",
+      "shop_price": "4.00",
+      "num": null,
+      "goods_name": "通宣理肺丸",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "812",
+      "goods_img": "http://img.youde.com/images/goods/20151111/f3ccdd27d2000e3f9255a7e3e2c488001101016liof7.jpg",
+      "market_price": "48.00",
+      "shop_price": "35.00",
+      "num": "52",
+      "goods_name": "百咳宁颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "858",
+      "goods_img": "http://img.youde.com/images/goods/20151116/f3ccdd27d2000e3f9255a7e3e2c488001711361ul79f.jpg",
+      "market_price": "18.00",
+      "shop_price": "13.00",
+      "num": "8",
+      "goods_name": "感冒清热颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "871",
+      "goods_img": "http://img.youde.com/images/goods/20151224/f3ccdd27d2000e3f9255a7e3e2c48800173256wl8443.jpg",
+      "market_price": "55.20",
+      "shop_price": "45.00",
+      "num": "5",
+      "goods_name": "金莲清热泡腾片",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "895",
+      "goods_img": "http://img.youde.com/images/goods/20151118/f3ccdd27d2000e3f9255a7e3e2c48800171311a672fl.jpg",
+      "market_price": "29.47",
+      "shop_price": "23.80",
+      "num": null,
+      "goods_name": "清热解毒软胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "915",
+      "goods_img": "http://img.youde.com/images/goods/20151120/f3ccdd27d2000e3f9255a7e3e2c488001706573hemyi.jpg",
+      "market_price": "33.00",
+      "shop_price": "29.80",
+      "num": null,
+      "goods_name": "小儿肺热咳喘口服液",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1230",
+      "goods_img": "http://img.youde.com/images/goods/20151216/f3ccdd27d2000e3f9255a7e3e2c48800144143fsc7r2.jpg",
+      "market_price": "28.00",
+      "shop_price": "25.80",
+      "num": null,
+      "goods_name": "小儿肺热咳喘口服",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "1335",
+      "goods_img": "http://img.youde.com/images/goods/20151226/f3ccdd27d2000e3f9255a7e3e2c488001024206f7vlv.jpg",
+      "market_price": "29.80",
+      "shop_price": "28.50",
+      "num": null,
+      "goods_name": "连花清瘟颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1385",
+      "goods_img": "http://img.youde.com/images/goods/20151229/f3ccdd27d2000e3f9255a7e3e2c48800152832mwitlg.jpg",
+      "market_price": "26.00",
+      "shop_price": "22.00",
+      "num": "3",
+      "goods_name": "丹皮酚软膏",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1473",
+      "goods_img": "http://img.youde.com/images/goods/20160607/8ca5fbd474b5cf9030c175dd03b533e71538062gchlf.jpg",
+      "market_price": "20.80",
+      "shop_price": "12.50",
+      "num": null,
+      "goods_name": "咳宁糖浆",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1476",
+      "goods_img": "http://img.youde.com/images/goods/20160105/96f3d9d6ad2e68ba7361554f249e059b110807cxxsxu.jpg",
+      "market_price": "15.00",
+      "shop_price": "11.19",
+      "num": "5",
+      "goods_name": "羚翘解毒丸",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "1512",
+      "goods_img": "http://img.youde.com/images/goods/20160329/f3ccdd27d2000e3f9255a7e3e2c488001458478cc67w.jpg",
+      "market_price": "23.70",
+      "shop_price": "18.80",
+      "num": null,
+      "goods_name": "祖卡木颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1546",
+      "goods_img": "http://img.youde.com/images/goods/20160106/96f3d9d6ad2e68ba7361554f249e059b1540257h1o8f.jpg",
+      "market_price": "7.50",
+      "shop_price": "2.90",
+      "num": "9",
+      "goods_name": "罗汉果止咳糖浆",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1596",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "2.00",
+      "shop_price": "0.75",
+      "num": "8",
+      "goods_name": "氨咖黄敏胶囊",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1665",
+      "goods_img": "http://img.youde.com/images/goods/20160324/6226232c94eb9c28192817f6ef84f2dd170836zr58f7.jpg",
+      "market_price": "16.00",
+      "shop_price": "15.00",
+      "num": null,
+      "goods_name": "对乙酰氨基酚混悬滴剂",
+      "url": ""
+    },
+    {
+      "is_otc": "1",
+      "goods_id": "1687",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "12.50",
+      "shop_price": "4.30",
+      "num": null,
+      "goods_name": "酚氨咖敏颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1786",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "7.50",
+      "shop_price": "4.20",
+      "num": "20",
+      "goods_name": "参苏丸",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1796",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "15.60",
+      "shop_price": "9.75",
+      "num": "8",
+      "goods_name": "双黄连合剂",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1797",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "21.80",
+      "shop_price": "15.75",
+      "num": null,
+      "goods_name": "布洛芬口服溶液",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1799",
+      "goods_img": "http://img.youde.com/images/goods/20160325/40211afe4d228d56bd5197f3b6a3caf517160999q7jf.jpg",
+      "market_price": "24.80",
+      "shop_price": "15.55",
+      "num": null,
+      "goods_name": "小儿解感颗粒",
+      "url": ""
+    },
+    {
+      "is_otc": "0",
+      "goods_id": "1820",
+      "goods_img": "http://img.youde.com/images/goods/404/16927875147311224.jpg",
+      "market_price": "15.40",
+      "shop_price": "5.80",
+      "num": null,
+      "goods_name": "复方锌布颗粒剂",
+      "url": ""
+    }
+  ]
+}

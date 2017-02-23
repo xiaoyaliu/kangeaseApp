@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
 	  },
 	  TextStyle:{
 			color:'#ffffff',
-			fontSize:15
+			fontSize:15,
+			fontFamily:"黑体"
 	  }
 });

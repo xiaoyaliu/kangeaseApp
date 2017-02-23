@@ -10,24 +10,23 @@ import {
 		View,
 		Image,
 		TouchableOpacity,
-		Platform,
-		StatusBar
+		Platform
 		} from 'react-native';
 
 
 export default class LaunchImage extends Component{
 	  constructor(props) {
 			super(props);
-
+            this.style=this.props.noBorder?null:{borderBottomWidth:1,borderBottomColor:'#d4d4d4'};
 	  }
 	  render() {
 			return (
-					<View style={styles.container}>
+					<View style={[styles.container,this.style]}>
 
 						  <TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.leftViewStyle}>
 								<Image source={{uri:'back_icon'}} style={styles.backImg}/>
 						  </TouchableOpacity>
-						  <Text style={{color:"#333333",fontSize:16}}>{this.props.title}</Text>
+						  <Text style={{color:"#333333",fontSize:16,fontFamily:"黑体"}}>{this.props.title}</Text>
 					</View>
 			);
 	  }
@@ -39,15 +38,13 @@ const styles = StyleSheet.create({
 			alignItems:'center',
 			height:Platform.OS==='ios'?50:44,
 			paddingTop:Platform.OS==='ios'?15:0,
-			justifyContent:'center',
-			borderBottomWidth:1,
-			borderBottomColor:'#d4d4d4'
+			justifyContent:'center'
 	  },
 	  leftViewStyle:{
 			width:Platform.OS==='ios'?28:24,
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
-			left:Platform.OS==='ios'?2:3,
+			left:Platform.OS==='ios'?3:4,
 			bottom:Platform.OS==='ios'?18:10,
 			alignItems:'center',
 			justifyContent:'center'

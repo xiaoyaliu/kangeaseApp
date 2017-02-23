@@ -13,13 +13,14 @@ import {
         Navigator
         } from 'react-native';
 
-import LaunchPage from './Component/Main/XMGLauchpage'
+import LaunchPage from './Component/Main/KELauchpage'
+import Order from './Component/Mine/KEMine'
 //var Main=require('./Component/Main/XMGMain')
 class XMGStart extends Component{
   render(){
     return(
             <Navigator
-                    initialRoute={{name: "启动页", component: LaunchPage}}
+                    initialRoute={{name: "启动页", component: Order}}
                     configureScene={()=>{return Navigator.SceneConfigs.VerticalUpSwipeJump}}
                     renderScene={(route, navigator) =>{
                                let Component=route.component;

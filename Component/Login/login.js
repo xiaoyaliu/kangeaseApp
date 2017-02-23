@@ -68,15 +68,15 @@ export default class LaunchImage extends Component{
 									  }
 								<View style={{height:20,marginTop:10}}>
 									  <TouchableOpacity style={styles.forgetPwd} onPress={this._jump.bind(this,ForgetPwd , "忘记密码")}>
-											<Text style={{color:"#ffffff",fontSize:12}}>忘记密码?</Text>
+											<Text style={{color:"#ffffff",fontSize:12,fontFamily:"黑体"}}>忘记密码?</Text>
 									  </TouchableOpacity>
 								</View>
 								<TouchableOpacity style={[{backgroundColor:this.state.login?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-									  <Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16}}>登录</Text>
+									  <Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>登录</Text>
 								</TouchableOpacity>
 						  </View>
 						  <TouchableOpacity style={styles.BottomBtn} onPress={this._jump.bind(this,Reg , "注册")}>
-								<Text style={{color:"#ffffff",fontSize:16}}>新用户注册</Text>
+								<Text style={{color:"#ffffff",fontSize:15,fontFamily:"黑体"}}>新用户注册</Text>
 						  </TouchableOpacity>
 					</View>
 			);
@@ -100,7 +100,7 @@ export default class LaunchImage extends Component{
 	  renderNameClear(){
 			if(this.state.nameClear&&Platform.OS!='ios'){
 				  return (<TouchableOpacity style={styles.clearBtn} onPress={()=>this.clearNameContent()}>
-								<Image source={{uri:'clearmode'}} style={{width:13,height:13}} resizeMode ="cover"/>
+								<Image source={{uri:'clearmode'}} style={{width:13,height:13}} resizeMode ="contain"/>
 						  </TouchableOpacity>)
 
 			}else{
@@ -112,7 +112,7 @@ export default class LaunchImage extends Component{
 	  renderPwdClear(){
 			if(this.state.pwdClear&&Platform.OS!='ios'){
 				  return (<TouchableOpacity style={styles.clearBtn} onPress={()=>this.clearPwdContent()}>
-						<Image source={{uri:'clearmode'}} style={{width:13,height:13}} resizeMode ="cover"/>
+						<Image source={{uri:'clearmode'}} style={{width:13,height:13}} resizeMode ="contain"/>
 				  </TouchableOpacity>)
 
 			}else{
@@ -120,7 +120,7 @@ export default class LaunchImage extends Component{
 				  </TouchableOpacity>);
 			}
 	  }
-	  //用户名密码按钮状态判断
+	  //密码按钮状态判断
 	  clearPwdState(value){
 			this.setState({
 				  pwdValue:value
@@ -179,11 +179,14 @@ const styles = StyleSheet.create({
 			paddingTop:0,
 			paddingBottom:0,
 			borderBottomWidth:1,
-			borderBottomColor:"#ffffff"
+			borderBottomColor:"#ffffff",
+			fontFamily:"黑体",
+			fontSize:13
 	  },
 	  loginBtn:{
 			height:Platform.OS=='ios'?50:44,
 			alignItems:'center',
+			borderRadius:2,
 			justifyContent:'center',
 			marginTop:14
 	  },
@@ -193,18 +196,23 @@ const styles = StyleSheet.create({
 	  },
 	  BottomBtn:{
 			width:86,
+			height:40,
+			alignItems:'center',
 	  },
 	  error:{
 			marginTop:30,
 			fontSize:13,
-			color:'#cc046f'
+			color:'#cc046f',
+			fontFamily:"黑体"
 	  },
 	  clearBtn:{
 			position:'absolute',
 			right:0,
-			bottom:9,
-			width:13,
-			height:13,
+			bottom:0,
+			width:14,
+			height:Platform.OS==='ios'?38:32,
+			alignItems:'center',
+			justifyContent:'center',
 			zIndex:2
 	  }
 });

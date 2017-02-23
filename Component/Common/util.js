@@ -37,11 +37,27 @@ module.exports = {
 
 			.then((responseText) => {
 				  successCallback(JSON.parse(responseText));
-	  })
-.catch(function(err){
-	  failCallback(err);
-});
+	        })
+            .catch(function(err){
+	               failCallback(err);
+            });
 },
+	  //跳转到component
+	  _jumpFocus(navigator,component, title){
+			if (navigator){
+				  navigator.push({
+						component: component,
+						title: title
+				  });
+			}
+	  },
+		//正则表达式
+	  regex:{
+			mobile:function(value){
+				  let s = /^1[3|4|5|7|8]\d{9}$/;
+				 return s.test(value)?true:false
+			}
+	  }
 /*loading效果*/
 
 };
