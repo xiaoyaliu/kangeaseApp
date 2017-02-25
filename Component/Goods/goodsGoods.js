@@ -14,7 +14,7 @@ import {
 		TouchableOpacity
 		} from 'react-native';
 import Util from './../Common/util';
-import ItemTitle from './itemTitle';
+import ItemTitle from './../Common/itemTitle';
 
 var img=["http://www.kangease.com/images/goods/20160614/f8787da6f335272ef5e12d613adcb1ae175749wkqtdj.jpg","http://www.kangease.com/images/goods/20160614/7d81255d1deda11c432a10e34c45ba5d210615lsp39i.jpg","http://www.kangease.com/images/goods/20160614/d41ca01a89af2eb2c9b275a24f2edc65210615owq2cv.jpg"]
 class Goods extends Component {

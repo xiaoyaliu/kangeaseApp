@@ -14,7 +14,7 @@ import {
 		Image
 		} from 'react-native';
 import Util from './../Common/util';
-import ItemTitle from './itemTitle';
+import ItemTitle from './../Common/itemTitle';
 var dataTest=require('./../data/searchList.json');
 class Goods extends Component {
 	  constructor(props) {

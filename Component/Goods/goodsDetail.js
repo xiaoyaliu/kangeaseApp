@@ -15,7 +15,7 @@ import {
 		} from 'react-native';
 import Util from './../Common/util';
 import GetBottom from './../Common/getBottom';
-import ItemTitle from './itemTitle';
+import ItemTitle from './../Common/itemTitle';
 var dataTest=require('./test.json');
 var screenWidth=Util.size.width;
 class Goods extends Component {

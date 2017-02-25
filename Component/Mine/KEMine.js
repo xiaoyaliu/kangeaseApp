@@ -14,9 +14,10 @@ import {
 		} from 'react-native';
 
 import Util from './../Common/util';
-import Order from './../Mine/order'
+import Order from './order/order'
+import Point from './point/point'
 import CommonCell from './../Common/ComponentCell';
-export default class LaunchImage extends Component{
+class KEMine extends Component{
 	  constructor(props) {
 			super(props);
 
@@ -47,7 +48,7 @@ export default class LaunchImage extends Component{
 								<CommonCell title="我的订单" rightTitle="查看全部订单" noBorder={true} navigator={this.props.navigator} component={Order}/>
 						  </View>
 						  <View style={{marginTop:10}}>
-								<CommonCell title="我的积分" />
+								<CommonCell title="我的积分" navigator={this.props.navigator} component={Point}/>
 								<CommonCell title="员工管理" />
 								<CommonCell title="员工等级" noBorder={true}/>
 						  </View>
@@ -122,3 +123,4 @@ const styles = StyleSheet.create({
 	  }
 
 });
+module.exports=KEMine

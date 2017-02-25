@@ -11,7 +11,7 @@ import {
 		View,
 		Platform,
 		} from 'react-native';
-import Util from './../Common/util';
+import Util from './util';
 class ItemTitle extends Component {
 	  constructor(props) {
 			super(props);

@@ -238,10 +238,11 @@ const styles = StyleSheet.create({
 			fontFamily:"黑体"
 	  },
 	  animateLine:{
+			position:'absolute',
 			width:Util.size.width/3,
 			height:3,
 			backgroundColor:"#f20583",
-			bottom:3
+			bottom:-1
 	  },
 	  cellStyle:{
 			height:96,

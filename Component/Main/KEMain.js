@@ -9,7 +9,7 @@ import {
 		} from 'react-native';
 
 var KEHome=require('./KEHome');//搜索页
-export default class Main extends Component {
+ class KEMain extends Component {
 	  constructor(props){
 			super(props);
 	  }
@@ -30,3 +30,4 @@ export default class Main extends Component {
 
 
 }
+module.exports=KEMain
