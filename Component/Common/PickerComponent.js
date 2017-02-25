@@ -92,14 +92,15 @@ const styles = StyleSheet.create({
 			height:Util.size.height,
 			position:'absolute',
 			left:0,
-			top:0,
+			bottom:0,
 			zIndex:10
 	  },
 	  picker:{
 			position:'absolute',
 			left:0,
 			bottom:0,
-			backgroundColor:'#fff'
+			backgroundColor:'#fff',
+			paddingBottom:20
 	  },
 	  itemTitleView:{
 			width:Util.size.width,
@@ -114,15 +115,14 @@ const styles = StyleSheet.create({
 			fontFamily:'黑体'
 	  },
 	  pickItem:{
-			marginLeft:12,
-			width:Util.size.width-24,
-			borderBottomColor:"#ccc",
-			borderBottomWidth:Util.pixel,
+			marginLeft:12
 	  },
 	  pickItemTouch:{
+			borderBottomColor:"#ccc",
+			borderBottomWidth:Util.pixel,
 			height:Platform.OS==='ios'?46:40,
 			justifyContent:'center',
-			width:Util.size.width-24,
+			width:Util.size.width-24
 	  }
 
 });

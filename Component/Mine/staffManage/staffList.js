@@ -8,7 +8,6 @@ import {
 		StyleSheet,
 		Text,
 		View,
-		Image,
 		TouchableOpacity,
 		Platform,
 		ListView,
@@ -17,7 +16,8 @@ import {
 
 import Util from './../../Common/util';
 import Nav from './../../Common/navComponent';
-import ItemTitle from './../../Common/itemTitle';
+import BottomCommon from "./../BottomCommon";
+import InsertStaff from "./insertStaff"
 var dataTest=require("./../../data/staff.json")
 import { SwipeListView} from 'react-native-swipe-list-view';
 class StaffList extends Component{
@@ -36,9 +36,11 @@ class StaffList extends Component{
 								  renderRow={(data)=>this.renderRowList(data)}
 								  renderHiddenRow={ (data) =>this.renderHide(data)}
 								  disableRightSwipe={true}
-								  rightOpenValue={-112}
+								  rightOpenValue={-168}
+								  style={{marginBottom:Platform.OS==='ios'?52:46}}
 								  />
 						  }
+                          <BottomCommon leftTitle="选择" rightTitle="新增员工" navigator={this.props.navigator} rightComponent={InsertStaff}/>
 					</View>
 			);
 	  }
@@ -63,17 +65,19 @@ class StaffList extends Component{
 			var data=dataTest.data[rowdata];
 			return(
 
-					<View style={styles.item}>
-                          <Text style={styles.text1}>姓名：{data.name}</Text>
-						  <Text style={styles.text1}>手机号：{data.mobile}</Text>
-						  <Text style={styles.text1}>本月销售：{data.sale}</Text>
+					<View style={styles.rowFront}>
+						  <View style={styles.listItems}>
+								<Text style={styles.text1}>姓名：{data.name}</Text>
+								<Text style={styles.text1}>手机号：{data.mobile}</Text>
+								<Text style={styles.text1}>本月销售：{data.sale}</Text>
+						 </View>
 					</View>
 			);
 	  }
 	  renderHide(data){
 			return(
-					<View style={styles.backRightBtnRight}>
-						  <TouchableOpacity style={[styles.backRightBtn,{backgroundColor:"#f1b80c"}]} onPress={() => Alert.alert("111") }>
+					<View style={styles.rowBack}>
+						  <TouchableOpacity style={[styles.backRightBtn,{backgroundColor:"#f1b80c",marginLeft:56}]} onPress={() => Alert.alert("111") }>
 								<Text style={styles.backTextWhite}>修改</Text>
 						  </TouchableOpacity>
 					<TouchableOpacity style={[styles.backRightBtn,{backgroundColor:"#f20583"}]} onPress={() => Alert.alert("111") }>
@@ -95,13 +99,12 @@ const styles = StyleSheet.create({
 			alignItems: 'center',
 			justifyContent: 'center',
 			width: 56,
-			height:96
+			height:90
 	  },
 
-	  backRightBtnRight: {
+	  rowBack: {
 			position: 'absolute',
 			top: 0,
-			backgroundColor: '#f20583',
 			right: 0,
 			flexDirection:"row"
 	  },
@@ -112,11 +115,16 @@ const styles = StyleSheet.create({
 	  text1:{
 			fontSize:13,
 			color:"#333333",
-			lineHeight:18
+			lineHeight:22
 	  },
-	  item:{
+	  rowFront:{
+			marginBottom:10,
+			backgroundColor:"#fff"
+	  },
+	  listItems:{
+	        width:Util.size.width,
+			height:90,
 			padding:10,
-			marginBottom:10
 	  }
 
 });

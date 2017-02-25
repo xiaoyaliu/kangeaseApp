@@ -92,14 +92,14 @@ export default class LaunchImage extends Component{
 						  <TouchableOpacity style={[{backgroundColor:this.state.reg?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1} onPress={()=>this.regSubmit()}>
 								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:15,fontFamily:"黑体"}}>免费注册</Text>
 						  </TouchableOpacity>
-						  {this.state.picker?
+						  {this.state.picker&&
 						  <Picker selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker:show})}>
 								<Picker.Item label="股东" value="1"></Picker.Item>
 								<Picker.Item label="分总" value="2"></Picker.Item>
 								<Picker.Item label="部长" value="3"></Picker.Item>
 								<Picker.Item label="店长" value="4"></Picker.Item>
 								<Picker.Item label="总经理" value="5"></Picker.Item>
-						  </Picker>:null}
+						  </Picker>}
 					</View>
 			);
 	  }
