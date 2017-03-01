@@ -9,7 +9,7 @@ import {
 		Switch,
 		Platform
 		} from 'react-native';
-import Util from './../Common/util'
+import Util from './../../Common/util'
 class CommonCell extends Component {
      constructor(props){
 		   super(props);
@@ -17,7 +17,7 @@ class CommonCell extends Component {
 	 }
 	  render() {
 			return (
-					<TouchableOpacity style={styles.container} disabled={this.props.navigator?false:true} onPress={()=>{Util._jumpFocus(this.props.navigator,this.props.component)}}>
+					<TouchableOpacity style={styles.container} disabled={this.props.navigator?false:true} onPress={()=>this.jump()}>
 						  <View style={[styles.cell,this.style]}>
 						  {/*左边*/}
 						  <Text style={{marginLeft:10,fontSize:13,color:'#666',fontFamily:"黑体"}}>{this.props.title}</Text>
@@ -32,7 +32,7 @@ class CommonCell extends Component {
 				  return(
 						  <View style={{flexDirection:'row',alignItems:'center'}}>
 								{this.rightTitle()}
-						  <Image source={{uri:'arrow_icon'}} style={styles.arrowImg} tintColor="#b3b3b3"/>
+								{this.props.rightArrow&&<Image source={{uri:'arrow_icon'}} style={styles.arrowImg} tintColor="#b3b3b3"/>}
 				         </View>
 				   )
 
@@ -40,9 +40,16 @@ class CommonCell extends Component {
 	  rightTitle(){
 			if(this.props.rightTitle&&this.props.rightTitle.length>0){
 				  return(
-						  <Text style={{marginRight:6,fontSize:12,color:'#b2b2b2',fontFamily:"黑体"}}>{this.props.rightTitle}</Text>
+						  <Text style={{marginRight:10,fontSize:12,color:'#b2b2b2',fontFamily:"黑体"}}>{this.props.rightTitle}</Text>
 				  )
 			}
+	  }
+	  jump(){
+			var params={
+				  backData:(value)=>this.props.backData(value),
+				  rightTitle:this.props.rightTitle
+			}
+			Util._jumpFocus(this.props.navigator,this.props.component,"",params)
 	  }
 }
 const styles = StyleSheet.create({

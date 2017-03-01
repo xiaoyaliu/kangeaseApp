@@ -21,7 +21,7 @@ class BottomCommon extends Component{
 	  render() {
 			return (
 					<View style={styles.container}>
-                           <TouchableOpacity style={[styles.item,styles.item1]}>
+                           <TouchableOpacity style={[styles.item,styles.item1]} onPress={()=>{Util._jumpFocus(this.props.navigator,this.props.leftComponet)}}>
 						         <Text style={{fontSize:13,color:"#333"}}>{this.props.leftTitle}</Text>
 						   </TouchableOpacity>
 						  <TouchableOpacity style={[styles.item,{backgroundColor:"#f20583"}]} onPress={()=>{Util._jumpFocus(this.props.navigator,this.props.rightComponent)}}>

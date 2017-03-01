@@ -43,11 +43,12 @@ module.exports = {
             });
 },
 	  //跳转到component
-	  _jumpFocus(navigator,component, title){
+	  _jumpFocus(navigator,component, title,pramas){
 			if (navigator){
 				  navigator.push({
 						component: component,
-						title: title
+						title: title,
+						passProps:pramas
 				  });
 			}
 	  },
@@ -56,7 +57,13 @@ module.exports = {
 			mobile:function(value){
 				  let s = /^1[3|4|5|7|8]\d{9}$/;
 				 return s.test(value)?true:false
+			},
+			//正整数
+			intB:function(value){
+				  let s =/^[0-9]*[1-9][0-9]*$/;
+				  return s.test(value)?true:false
 			}
+
 	  }
 /*loading效果*/
 

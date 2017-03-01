@@ -109,7 +109,7 @@ class Cart extends Component {
 									  <TouchableOpacity style={styles.changeNum}>
 											<Text style={{fontFamily:"黑体",fontSize:16,color:"#333"}}>-</Text>
 									  </TouchableOpacity>
-									  <TextInput style={styles.inputNum} underlineColorAndroid='transparent'/>
+									  <TextInput keyboardType="numeric" style={styles.inputNum} underlineColorAndroid='transparent'/>
 									  <TouchableOpacity style={styles.changeNum}>
 											<Text style={{fontFamily:"黑体",fontSize:16,color:"#333"}}>+</Text>
 									  </TouchableOpacity>
@@ -259,8 +259,8 @@ const styles = StyleSheet.create({
 			borderRightColor:"#b3b3b3",
 			borderLeftWidth:1,
 			borderRightWidth:1,
-			paddingTop:0,
-			paddingBottom:6
+			textAlign:'center',
+			padding:2
 	  },
 	  bottomFix:{
 			backgroundColor:"#fff",

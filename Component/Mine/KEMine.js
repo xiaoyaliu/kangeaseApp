@@ -17,6 +17,10 @@ import Util from './../Common/util';
 import Order from './order/order'
 import Point from './point/point'
 import CommonCell from './../Common/ComponentCell';
+import StaffManage from './staffManage/staffList';
+import StaffLevel from './staffLevel/staffLevelList'
+import Personal from './personalData/myData'
+import ChangePwd from './chanfePwd'
 class KEMine extends Component{
 	  constructor(props) {
 			super(props);
@@ -49,12 +53,12 @@ class KEMine extends Component{
 						  </View>
 						  <View style={{marginTop:10}}>
 								<CommonCell title="我的积分" navigator={this.props.navigator} component={Point}/>
-								<CommonCell title="员工管理" />
-								<CommonCell title="员工等级" noBorder={true}/>
+								<CommonCell title="员工管理" navigator={this.props.navigator} component={StaffManage}/>
+								<CommonCell title="员工等级" noBorder={true} navigator={this.props.navigator} component={StaffLevel}/>
 						  </View>
 						  <View style={{marginTop:10}}>
-								<CommonCell title="个人资料" />
-								<CommonCell title="修改密码" noBorder={true}/>
+								<CommonCell title="个人资料" navigator={this.props.navigator} component={Personal}/>
+								<CommonCell title="修改密码" noBorder={true} navigator={this.props.navigator} component={ChangePwd}/>
 						  </View>
 						  <View style={{marginTop:10}}>
 								<CommonCell title="关于康亿"/>

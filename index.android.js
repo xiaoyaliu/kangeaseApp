@@ -14,7 +14,7 @@ import {
         } from 'react-native';
 
 import LaunchPage from './Component/Main/KELauchpage'
-import Order from './Component/Mine/staffManage/deleteStaff'
+import Order from './Component/Goods/KEGoods'
 //var Main=require('./Component/Main/XMGMain')
 class XMGStart extends Component{
   render(){

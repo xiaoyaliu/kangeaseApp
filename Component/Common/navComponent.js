@@ -13,7 +13,7 @@ import {
 		Platform
 		} from 'react-native';
 
-
+import Util from './../Common/util';
 export default class LaunchImage extends Component{
 	  constructor(props) {
 			super(props);
@@ -27,6 +27,10 @@ export default class LaunchImage extends Component{
 								<Image source={{uri:'back_icon'}} style={styles.backImg}/>
 						  </TouchableOpacity>
 						  <Text style={{color:"#333333",fontSize:16,fontFamily:"黑体"}}>{this.props.title}</Text>
+						  {this.props.right&&
+						  <TouchableOpacity onPress={()=>Util._jumpFocus(this.props.navigator,this.props.go)} style={styles.RightViewStyle}>
+								<Image source={{uri:'search_icon'}} tintColor="#6b6b6b" style={styles.SearchIcon}/>
+						  </TouchableOpacity>}
 					</View>
 			);
 	  }
@@ -50,8 +54,21 @@ const styles = StyleSheet.create({
 			justifyContent:'center'
 
 	  },
+	  RightViewStyle:{
+			width:Platform.OS==='ios'?28:24,
+			height:Platform.OS==='ios'?28:24,
+			position:'absolute',
+			right:Platform.OS==='ios'?4:5,
+			bottom:Platform.OS==='ios'?18:10,
+			alignItems:'center',
+			justifyContent:'center'
+	  },
 	  backImg:{
 			width:Platform.OS==='ios'?18:16,
 			height:Platform.OS==='ios'?18:16
+	  },
+	  SearchIcon:{
+			width:Platform.OS==='ios'?16:14,
+			height:Platform.OS==='ios'?16:14
 	  }
 });

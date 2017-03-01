@@ -39,7 +39,8 @@ export default class Picker extends Component{
 					(child,i) => {
 						  itemArr[i]=(
 								  <View style={styles.pickItem} key={i}>
-								  <TouchableOpacity style={styles.pickItemTouch} onPress={(index,name)=>{this.update(child.props.value,child.props.label)}}>
+
+								  <TouchableOpacity style={styles.pickItemTouch} onPress={(index,name)=>{child.props.isPop?this.jump(child.props.isPop,child.props.value):this.update(child.props.value,child.props.label)}}>
 								     <Text style={{fontSize:12,fontFamily:'黑体'}}>{child.props.label}</Text>
 										{this.getCheck(child.props.value)}
 								  </TouchableOpacity>
@@ -51,13 +52,21 @@ export default class Picker extends Component{
 						  <TouchableOpacity style={styles.container} onPress={(index,name)=>{this.update(this.state.selectedValue,this.state.selectedName)}}>
 								<View style={styles.picker}>
 								<View style={styles.itemTitleView}>
-									  <Text style={styles.itemTitleName}>等级</Text>
+									  <Text style={styles.itemTitleName}>{this.props.itemTitleName}</Text>
 								</View>
 								{itemArr}
 								</View>
 						  </TouchableOpacity>
 			);
 	  }
+	  jump(isPop,value){
+			var passProps={
+				  currentDay:this.props.currentDay,
+				  cronCyc_day:(id)=>{this.props.cronCyc_day(id);this.update(value,id)}
+			}
+			Util._jumpFocus(this.props.navigator,isPop,"",passProps)
+	  }
+
 	  getCheck(child){
 			if(child==this.state.selectedValue){
 				  return (

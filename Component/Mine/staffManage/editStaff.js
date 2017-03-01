@@ -19,7 +19,7 @@ import Util from './../../Common/util';
 import Nav from './../../Common/navComponent';
 import  Picker from './../../Common/PickerComponent';
 var dataTest=require("./../../data/plan.json");
-class InsertStaff extends Component{
+class EditStaff extends Component{
 	  constructor(props) {
 			super(props);
 			this.state={
@@ -27,8 +27,7 @@ class InsertStaff extends Component{
 				  rankValue:3,
 				  picker1:false,
 				  picker2:false,
-				  selectedPlanName:"",
-				  finish:false
+				  selectedPlanName:""
 			}
 	  }
 	  render() {
@@ -83,7 +82,7 @@ class InsertStaff extends Component{
 								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>保存</Text>
 						  </TouchableOpacity>
 						  {this.state.picker1&&
-						  <Picker itemTitleName="等级" selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker1:show})}>
+						  <Picker selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker1:show})}>
 								<Picker.Item label="股东" value="1"></Picker.Item>
 								<Picker.Item label="分总" value="2"></Picker.Item>
 								<Picker.Item label="店长" value="4"></Picker.Item>
@@ -223,4 +222,4 @@ const styles = StyleSheet.create({
 	  }
 
 });
-module.exports=InsertStaff
+module.exports=EditStaff

@@ -16,6 +16,8 @@ import {
 import Util from './../../Common/util';
 import Nav from './../../Common/navComponent';
 import ItemTitle from './../../Common/itemTitle';
+import BottomCommon from "./../BottomCommon"
+import PlanList from "./../creditPlan/planList"
 class KEMine extends Component{
 	  constructor(props) {
 			super(props);
@@ -42,6 +44,7 @@ class KEMine extends Component{
 								<ItemTitle title="积分明细"/>
 
 						  </View>
+						  <BottomCommon leftTitle="联系财务" rightTitle="授信计划" navigator={this.props.navigator} rightComponent={PlanList} />
 					</View>
 			);
 	  }
