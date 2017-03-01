@@ -1,5 +1,5 @@
 /**
- ÂÖ²¥
+ è½®æ’­
  */
 
 import React, { Component } from 'react';
@@ -24,25 +24,29 @@ var Thumb = React.createClass({
 	  },
 	  getInitialState(){
 			return{
-				  currentPage:0
+				  currentPage:0,
+				  onStartShouldSetResponder:0
 			}
 	  },
+	  onStartShouldSetResponder(e){
+			console.log(111111)
+			this.props.changeEnabled(false)
+			return true
+      },
+
 	  render(){
 			return(
-					<View style={{width:screenWidth,height:screenWidth}}>
-						   <ScrollView
-						   ref='scrollView'
-						   horizontal={true}
-						   showsHorizontalScrollIndicator={false}
-						   pagingEnabled={true}
-						   onScrollEndDrag={this.onEndDrag}
-						   onScrollBeginDrag={this.onStartDrag}
-						   onMomentumScrollEnd={(e) => this.onAnimationEnd(e)}
-
-						   >
-						   {this.renderAllImage()}
-
-						   </ScrollView>
+					<View style={{width:screenWidth,height:screenWidth}}   onStartShouldSetResponder={()=>this.onStartShouldSetResponder()}>
+						  <ScrollView  ref='scrollView'
+								 horizontal={true}
+								 showsHorizontalScrollIndicator={false}
+								 pagingEnabled={true}
+								 onPress={()=>console.log(222)}
+								 onScrollEndDrag={this.onEndDrag}
+								 onScrollBeginDrag={this.onStartDrag}
+								 onMomentumScrollEnd={(e) => this.onAnimationEnd(e)}>
+								{this.renderAllImage()}
+						  </ScrollView>
 						  {this.renderPageCircle()}
 					</View>
 			)
@@ -51,60 +55,60 @@ var Thumb = React.createClass({
 	  componentDidMount(){
 
 	  },
-/*	  startTimer(){
-			var img=this.props.img;
-			var scrollView=this.refs.scrollView;
-          this.timer=this.setInterval(function(){
-				var currentPage=0;
-				if(this.state.currentPage<img.length-1){
-					  currentPage=this.state.currentPage+1;
-				}else{
-					  currentPage=0;
-				}
-				this.setState({
-					  currentPage:currentPage
-				})
-				//ÈÃscrollView¹ö¶¯
-				var offsetX=currentPage*screenWidth;
-				scrollView.scrollResponderScrollTo({x:offsetX,y:0,animated:true})
-		  },this.props.duration)
-	  },*/
+	  /*	  startTimer(){
+	   var img=this.props.img;
+	   var scrollView=this.refs.scrollView;
+	   this.timer=this.setInterval(function(){
+	   var currentPage=0;
+	   if(this.state.currentPage<img.length-1){
+	   currentPage=this.state.currentPage+1;
+	   }else{
+	   currentPage=0;
+	   }
+	   this.setState({
+	   currentPage:currentPage
+	   })
+	   //è®©scrollViewæ»šåŠ¨
+	   var offsetX=currentPage*screenWidth;
+	   scrollView.scrollResponderScrollTo({x:offsetX,y:0,animated:true})
+	   },this.props.duration)
+	   },*/
 	  renderAllImage(){
 			var img=this.props.img;
-	       var allChild=[];
+			var allChild=[];
 			for(var i=0;i<img.length;i++){
 				  allChild.push(
-						  <TouchableOpacity activeOpacity={1} key={i} style={{width:screenWidth,height:screenWidth,alignItems:'center',justifyContent:'center',backgroundColor:"#fff"}}>
+						  <View activeOpacity={1} key={i} style={{width:screenWidth,height:screenWidth,alignItems:'center',justifyContent:'center',backgroundColor:"#fff"}}>
 								<Image  source={{uri:img[i]}} style={{width:screenWidth-40,height:screenWidth-40}} />
-						  </TouchableOpacity>
+						  </View>
 				  )
 			}
 			return allChild;
-	   },
-	  //·µ»ØËùÓĞÔ­µã
+	  },
+	  //è¿”å›æ‰€æœ‰åŸç‚¹
 	  renderPageCircle(){
 			var img=this.props.img;
 			return <View style={styles.circle}><Text style={styles.circleIcon}>{this.state.currentPage+1}/{img.length}</Text></View>;
 	  },
-	  //µ±Ò»Ö¡¹ö¶¯Íê±ÏµÄÊ±ºòµ÷ÓÃ
+	  //å½“ä¸€å¸§æ»šåŠ¨å®Œæ¯•çš„æ—¶å€™è°ƒç”¨
 	  onAnimationEnd(e){
-			//Çó³öË®Æ½·½ÏòÆ«ÒÆÁ¿
+			//æ±‚å‡ºæ°´å¹³æ–¹å‘åç§»é‡
 			var offsetLeft=Math.round(e.nativeEvent.contentOffset.x);
 			var width=Math.round(screenWidth)
 			var currentPage=Math.floor(offsetLeft/width);
 			this.setState({
 				  currentPage:currentPage
 			});
-			this.props.item(currentPage)
+			//this.props.item(currentPage)
 	  },
-	  //µ±½áÊøÊÖ¶¯ÍÏ×§µÄÊ±ºòµ÷ÓÃ¡£
-	 /* onEndDrag(){
-			this.startTimer()
-	  },*/
-	  //µ±¿ªÊ¼ÊÖ¶¯ÍÏ×§µÄÊ±ºòµ÷ÓÃ¡£
+	  //å½“ç»“æŸæ‰‹åŠ¨æ‹–æ‹½çš„æ—¶å€™è°ƒç”¨ã€‚
+	  /* onEndDrag(){
+	   this.startTimer()
+	   },*/
+	  //å½“å¼€å§‹æ‰‹åŠ¨æ‹–æ‹½çš„æ—¶å€™è°ƒç”¨ã€‚
 	  /*onStartDrag(){
-         this.clearInterval(this.timer)
-	  }*/
+	   this.clearInterval(this.timer)
+	   }*/
 })
 
 var styles = StyleSheet.create({
@@ -123,7 +127,7 @@ var styles = StyleSheet.create({
 	  circleIcon:{
 			color:"#fff",
 			fontSize:14,
-			fontFamily:"ºÚÌå"
+			fontFamily:"é»‘ä½“"
 	  }
 });
 module.exports=Thumb;

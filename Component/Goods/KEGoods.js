@@ -19,7 +19,7 @@ import {
 var screenWidth=Util.size.width;
 import Util from './../Common/util';
 var dataTest=require('./../data/cart.json');
-import LunBoCom from './Lunbo';//图片轮播
+
 import GoodsGoods from './goodsGoods';
 import GoodsDetail from './goodsDetail';
 import GoodsEvaluate from './goodsEvaluate';
@@ -32,10 +32,10 @@ class Goods extends Component {
 			this.state = {
 				  fadeAnim: new Animated.Value(6),
 				  isShow: false,
-				  isLunbo:true,
 				  currentPage:0,
 				  item:0,
-				  top:0
+				  top:0,
+				  scrollEnabled:false
 			}
 	  }
 
@@ -65,22 +65,15 @@ class Goods extends Component {
 										horizontal={true}
 										showsHorizontalScrollIndicator={false}
 										pagingEnabled={true}
-										onScrollBeginDrag={() => this.onBeginDrag()}
+										scrollEnabled={this.state.scrollEnabled}
 										onMomentumScrollEnd ={(e) => this.onAnimationEnd(e)}>
 
 									  <ScrollView style={styles.scrollPage}
-												  ref="ViewScroll"
 												  onScrollBeginDrag={(e) =>this.ScrollGoodsStart(e)}
 												  onScrollEndDrag={(e) =>this.ScrollGoodsEnd(e)}
 												  onMomentumScrollEnd ={(e) => this.onScrollEnd(e)}
 											  >
-											<View  style={{height:!this.state.isLunbo?screenWidth:0,width:screenWidth}}>
-											<TouchableOpacity activeOpacity={1} style={{width:screenWidth,height:screenWidth,alignItems:'center',justifyContent:'center',backgroundColor:"#fff"}}>
-												  <Image  source={{uri:img[this.state.item]}} style={{width:screenWidth-40,height:screenWidth-40}} />
-											</TouchableOpacity>
-											  <View style={styles.circle}><Text style={styles.circleIcon}>{this.state.item+1}/{img.length}</Text></View>
-											</View>
-											<GoodsGoods num={10} isPadding={this.state.isLunbo} goEvaluate={()=>this.scrollToView(2)}/>
+											<GoodsGoods changeEnabled={(value)=>this.setState({scrollEnabled:value})} num={10} goEvaluate={()=>this.scrollToView(2)}/>
 									  </ScrollView>
 									  <ScrollView style={styles.scrollPage}>
 											<GoodsDetail/>
@@ -89,15 +82,12 @@ class Goods extends Component {
 										   <GoodsEvaluate/>
 									  </ScrollView>
 								</ScrollView>
-								<View style={[{height:this.state.isLunbo?screenWidth:0,top:this.state.top},styles.lunbo]}>
-								<LunBoCom img={img} item={(value)=>this.setState({item:value})}/>
-								</View>
 							</View>:null}
 						  {/*详情页底部*/}
 						  <View style={styles.bottomCommon}>
 								<TouchableOpacity style={styles.goCart}>
 								    <Image source={{uri:"tabbar_cart"}} style={{width:18,height:18,marginTop:4}}/>
-									  <Text style={styles.textB}>购物车</Text>
+									  <Text style={styles.textB}>{this.state.currentPage}购物车</Text>
 									  <View style={styles.cartNum}><Text style={styles.textC}>40</Text></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.joinCart}>
@@ -125,7 +115,6 @@ class Goods extends Component {
 
 	  ScrollGoodsStart(e){
 			start=e.nativeEvent.contentOffset.y;
-			this.onBeginDrag();
 	  }
 	  ScrollGoodsEnd(e){
 			console.log(start)
@@ -134,18 +123,9 @@ class Goods extends Component {
 				  this.scrollToView(1)
 			}
 	  }
-	  //当开始拖拽的时候调用
-	  onBeginDrag(){
-				  this.setState({
-						isLunbo:false
-				  });
-
-	  }
-	  onScrollEnd(e) {
-			console.log(e.nativeEvent.contentOffset)
+	  onScrollEnd(e){
 			this.setState({
 				  top: -e.nativeEvent.contentOffset.y,
-				  isLunbo: true
 			});
 
 	  }
@@ -161,30 +141,45 @@ class Goods extends Component {
 					{toValue:value ,
 						  duration: 0 }
 			).start();
+
+			if(currentPage==0){
 				  this.setState({
+						scrollEnabled:false,
 						currentPage:currentPage,
-						isLunbo:currentPage===0?true:false,
 						fadeAnim:new Animated.Value(value)
-				  });
-
-
+				  })
+			}else{
+				  this.setState({scrollEnabled:true,
+						currentPage:currentPage,
+						fadeAnim:new Animated.Value(value)
+				  })
+			}
 	  }
 	  scrollToView(item){
 			var scrollView=this.refs.scrollView;
-			var value=6+50*item
+			var value=6+50*item;
 			if(this.state.currentPage!=item){
 				  Animated.timing(
 						  this.state.fadeAnim,
 						  {toValue: value,
 								duration: 100 }
 				  ).start();
-				  this.setState({
-						currentPage:item,
-						isLunbo:item===0?true:false,
-						fadeAnim:new Animated.Value(value)
-				  });
+				  scrollView.scrollResponderScrollTo({x:screenWidth*item,y:0,animated:true})
 
-			scrollView.scrollResponderScrollTo({x:screenWidth*item,y:0,animated:true})
+
+				  if(item==0){
+						this.setState({
+							  scrollEnabled:false,
+							  currentPage:item,
+							  fadeAnim:new Animated.Value(value)
+							  })
+				  }else{
+						this.setState({scrollEnabled:true,
+							  currentPage:item,
+							  fadeAnim:new Animated.Value(value)
+						})
+				  }
+
 			}
 	  }
 }
