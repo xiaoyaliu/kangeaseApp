@@ -80,17 +80,17 @@ export default class LaunchImage extends Component{
 									  <Image source={{uri:"checked_circle_icon"}} style={styles.circleIcon} resizeMode="contain" />:
 										<View style={styles.degStyle}></View>
 									  }
-									  <Text style={{color:"#3d3d3d",fontSize:10,fontFamily:"黑体"}}>我已阅读并同意《</Text>
-										<Text style={{color:"#f20583",fontSize:10,fontFamily:"黑体"}}>康亿海外购注册条款</Text>
+									  <Text style={{color:"#3d3d3d",fontSize:10}}>我已阅读并同意《</Text>
+										<Text style={{color:"#f20583",fontSize:10}}>康亿海外购注册条款</Text>
 									  </TouchableOpacity>
 									  {/*<TouchableOpacity navigator={this.props.navigator} onPress={this._jump.bind(this,regItem,"条款")}>
-											<Text style={{color:"#f20583",fontSize:10,fontFamily:"黑体"}}>康亿海外购注册条款</Text>
+											<Text style={{color:"#f20583",fontSize:10,}}>康亿海外购注册条款</Text>
 									  </TouchableOpacity>*/}
-									  <Text style={{color:"#3d3d3d",fontSize:10,fontFamily:"黑体"}}>》</Text>
+									  <Text style={{color:"#3d3d3d",fontSize:10}}>》</Text>
 								</View>
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.reg?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1} onPress={()=>this.regSubmit()}>
-								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:15,fontFamily:"黑体"}}>免费注册</Text>
+								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:15}}>免费注册</Text>
 						  </TouchableOpacity>
 						  {this.state.picker&&
 						  <Picker itemTitleName="等级"  selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker:show})}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 		    width:76,
 			fontSize:13,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
 	  styleRight:{
 			width:Util.size.width-86
@@ -179,8 +179,7 @@ const styles = StyleSheet.create({
 	  },
 	  getCodeText:{
 			color:"#f20583",
-			fontSize:13,
-			fontFamily:"黑体",
+			fontSize:13
 	  },
 	  loginBtn:{
 			height:Platform.OS=='ios'?50:44,

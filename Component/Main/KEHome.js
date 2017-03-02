@@ -35,8 +35,8 @@ var Search=require('../Search/KESearch');//搜索页
 	  renderTabBarItem(title,iconName,selectedIconName,selectedTab,componentName){
 			return(
 					<TabNavigator.Item
-							titleStyle={{color:"#999999",fontFamily:"微软雅黑",marginTop:3,marginBottom:3}}
-							selectedTitleStyle={{color:"#f20583",fontFamily:"微软雅黑"}}
+							titleStyle={{color:"#999999",marginTop:3,marginBottom:3}}
+							selectedTitleStyle={{color:"#f20583"}}
 							selected={this.state.selectedTab === selectedTab}
 							title={title}
 							renderIcon={() => <Image style={styles.iconStyle} source={{uri:iconName}} />}

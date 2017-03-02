@@ -26,7 +26,7 @@ export default class LaunchImage extends Component{
 						  <TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.leftViewStyle}>
 								<Image source={{uri:'back_icon'}} style={styles.backImg}/>
 						  </TouchableOpacity>
-						  <Text style={{color:"#333333",fontSize:16,fontFamily:"黑体"}}>{this.props.title}</Text>
+						  <Text style={{color:"#333333",fontSize:16,}}>{this.props.title}</Text>
 						  {this.props.right&&
 						  <TouchableOpacity onPress={()=>Util._jumpFocus(this.props.navigator,this.props.go)} style={styles.RightViewStyle}>
 								<Image source={{uri:'search_icon'}} tintColor="#6b6b6b" style={styles.SearchIcon}/>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 	  container:{
 			backgroundColor:"#fff",
 			alignItems:'center',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?58:44,
 			paddingTop:Platform.OS==='ios'?15:0,
 			justifyContent:'center'
 	  },
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
 			left:Platform.OS==='ios'?3:4,
-			bottom:Platform.OS==='ios'?18:10,
+			bottom:Platform.OS==='ios'?5:10,
 			alignItems:'center',
 			justifyContent:'center'
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
 			right:Platform.OS==='ios'?4:5,
-			bottom:Platform.OS==='ios'?18:10,
+			bottom:Platform.OS==='ios'?5:10,
 			alignItems:'center',
 			justifyContent:'center'
 	  },

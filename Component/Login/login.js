@@ -68,15 +68,15 @@ export default class LaunchImage extends Component{
 									  }
 								<View style={{height:20,marginTop:10}}>
 									  <TouchableOpacity style={styles.forgetPwd} onPress={this._jump.bind(this,ForgetPwd , "忘记密码")}>
-											<Text style={{color:"#ffffff",fontSize:12,fontFamily:"黑体"}}>忘记密码?</Text>
+											<Text style={{color:"#ffffff",fontSize:12,}}>忘记密码?</Text>
 									  </TouchableOpacity>
 								</View>
 								<TouchableOpacity style={[{backgroundColor:this.state.login?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-									  <Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>登录</Text>
+									  <Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,}}>登录</Text>
 								</TouchableOpacity>
 						  </View>
 						  <TouchableOpacity style={styles.BottomBtn} onPress={this._jump.bind(this,Reg , "注册")}>
-								<Text style={{color:"#ffffff",fontSize:15,fontFamily:"黑体"}}>新用户注册</Text>
+								<Text style={{color:"#ffffff",fontSize:15,}}>新用户注册</Text>
 						  </TouchableOpacity>
 					</View>
 			);
@@ -179,8 +179,7 @@ const styles = StyleSheet.create({
 			paddingTop:0,
 			paddingBottom:0,
 			borderBottomWidth:1,
-			borderBottomColor:"#ffffff",
-			fontFamily:"黑体",
+			borderColor:"rgb(255,255,255)",
 			fontSize:13
 	  },
 	  loginBtn:{
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
 			marginTop:30,
 			fontSize:13,
 			color:'#cc046f',
-			fontFamily:"黑体"
+
 	  },
 	  clearBtn:{
 			position:'absolute',

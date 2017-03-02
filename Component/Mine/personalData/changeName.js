@@ -35,7 +35,7 @@ class InsertStaff extends Component{
 
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1} onPress={()=>this.SubmitDay()}>
-								<Text style={{color:this.state.finish?"#ffffff":"#e6a4c0",fontSize:15,fontFamily:"黑体"}}>保存</Text>
+								<Text style={{color:this.state.finish?"#ffffff":"#e6a4c0",fontSize:15,}}>保存</Text>
 						  </TouchableOpacity>
 
 					</View>

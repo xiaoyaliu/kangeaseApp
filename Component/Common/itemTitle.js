@@ -23,7 +23,7 @@ class ItemTitle extends Component {
 	  render() {
 			return (
 					<View style={styles.container}>
-						 <Text style={{fontFamily:"黑体",fontSize:14,color:"#333"}}>{this.props.title}</Text>
+						 <Text style={{fontSize:14,color:"#333"}}>{this.props.title}</Text>
 					</View>
 			);
 

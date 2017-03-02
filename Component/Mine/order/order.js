@@ -216,14 +216,14 @@ const styles = StyleSheet.create({
 	  },
 	  tabBarText:{
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  },
 	  animateLine:{
 			position:'absolute',
 			width:Util.size.width*0.25,
 			height:3,
 			backgroundColor:"#f20583",
-			bottom:-1,
+			bottom:-1
 
 	  },
 	  cellStyle:{
@@ -238,13 +238,11 @@ const styles = StyleSheet.create({
 			marginLeft:10
 	  },
 	  goods_name:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333333",
 			lineHeight:18
 	  },
 	  goods_price:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#323232",
 			marginTop:26
@@ -252,7 +250,6 @@ const styles = StyleSheet.create({
 	  addressAddress:{
 			width:Util.size.width-73,
 			fontSize:12,
-			fontFamily:"黑体",
 			color:"#333",
 			lineHeight:18
 	  },
@@ -266,7 +263,6 @@ const styles = StyleSheet.create({
 			backgroundColor:"#fff"
 	  },
 	  text1:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#f20583"
 	  },
@@ -277,17 +273,15 @@ const styles = StyleSheet.create({
 			justifyContent:'flex-end',
 			backgroundColor:"#fff",
 			borderBottomColor:"#d9d9d9",
-			borderBottomWidth:0.5,
+			borderBottomWidth:1,
 			paddingRight:10
 	  },
 	  text2:{
-			fontFamily:"黑体",
 			fontSize:11,
 			color:"#353535",
 			textAlign:'right',
 	  },
 	  text3:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#666",
 	  },

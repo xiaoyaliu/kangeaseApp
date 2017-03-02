@@ -64,7 +64,7 @@ class SearchList extends Component {
 
 
 										<View style={styles.dataNum}>
-											  <Text style={{color:"#999999",fontFamily:"微软雅黑",fontSize:11}}>搜索到{this.state.dataNumber}个于“{this.props.searchValue}”相关的商品</Text>
+											  <Text style={{color:"#999999",fontSize:11}}>搜索到{this.state.dataNumber}个于“{this.props.searchValue}”相关的商品</Text>
 										</View>
 										<ListView dataSource={this.state.dataSource}
 												  initialListSize={12}
@@ -74,7 +74,7 @@ class SearchList extends Component {
 												  scrollRenderAheadDistance={100}
 												/>
 										<View style={styles.dataNum}>
-											  <Text style={{color:"#999999",fontFamily:"微软雅黑",fontSize:11}}>{this.state.dataNumber}个于“减肥”相关的商品加载完毕</Text>
+											  <Text style={{color:"#999999",fontSize:11}}>{this.state.dataNumber}个于“减肥”相关的商品加载完毕</Text>
 										</View>
 								  </ScrollView>:
 								  (<ActivityIndicator
@@ -85,9 +85,9 @@ class SearchList extends Component {
 								</View>:
 						  <View style={styles.container_emply}>
 								<Image source={{uri:"sad_icon"}} style={{width:Util.size.width*0.21,height:Util.size.width*0.21,marginTop:Util.size.width*0.19}}/>
-								<Text style={{marginTop:24,color:"#333",fontSize:13,fontFamily:"黑体"}}>抱歉，没有找到与“减肥”相关的商品</Text>
+								<Text style={{marginTop:24,color:"#333",fontSize:13}}>抱歉，没有找到与“减肥”相关的商品</Text>
 								<TouchableOpacity style={styles.loginBtn} onPress={()=>{this.update()}}>
-									  <Text style={{color:"#f20583",fontSize:15,fontFamily:"黑体"}}>返回首页</Text>
+									  <Text style={{color:"#f20583",fontSize:15}}>返回首页</Text>
 								</TouchableOpacity>
 						  </View>
 						  }
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
 	  },
 	  tabBarText:{
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  },
 	  animateLine:{
 			position:'absolute',
@@ -256,13 +256,11 @@ const styles = StyleSheet.create({
 			marginLeft:10
 	  },
 	  goods_name:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333333",
 			lineHeight:18
 	  },
 	  goods_price:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#323232",
 			marginTop:12

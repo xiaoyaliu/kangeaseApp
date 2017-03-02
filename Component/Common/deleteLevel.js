@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
 			textAlign:'center',
 			fontSize:15,
 			color:"#333",
-			fontFamily:"黑体",
 			paddingTop:28,
 			paddingBottom:28,
 			borderBottomColor:"#cccccc",
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
 	  text1:{
 			color:"#226ae6",
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  }
 
 });

@@ -121,20 +121,18 @@ const styles = StyleSheet.create({
 			marginLeft:10,
 			paddingRight:10,
 			borderTopColor:"#ccc",
-			borderTopWidth:0.5
+			borderTopWidth:1
 	  },
 	  goods_middle:{
 			width:Util.size.width-124,
 			marginLeft:10
 	  },
 	  goods_name:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333333",
 			lineHeight:18
 	  },
 	  goods_price:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#323232",
 			marginTop:26
@@ -142,19 +140,16 @@ const styles = StyleSheet.create({
 	  addressAddress:{
 			width:Util.size.width-73,
 			fontSize:12,
-			fontFamily:"黑体",
 			color:"#333",
 			lineHeight:18
 	  },
 
 	  text1:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#999999",
 			marginTop:8
 	  },
 	  text3:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#666",
 	  },
@@ -190,7 +185,6 @@ const styles = StyleSheet.create({
 			marginRight:40
 	  },
 	  text2:{
-			fontFamily:"黑体",
 			fontSize:14,
 			color:"#333"
 	  },
@@ -213,12 +207,11 @@ const styles = StyleSheet.create({
 			paddingRight:10
 	  },
 	  text4:{
-			fontFamily:"黑体",
+
 			fontSize:12,
 			color:"#f20583"
 	  },
 	  text5:{
-            fontFamily:"黑体",
 			fontSize:14,
 			color:"#333"
 	  }

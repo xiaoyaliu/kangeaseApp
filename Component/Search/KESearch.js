@@ -159,7 +159,7 @@ class KESearch extends Component {
 						  </View>
 								<View style={{justifyContent:"center",alignItems:'center'}}>
 								<TouchableOpacity style={{justifyContent:"center",alignItems:'center',height:50,width:120}} onPress={()=>Alert.alert("111")}>
-								   <Text style={{color:"#f20583",fontSize:15,fontFamily:"黑体"}} >清空历史记录</Text>
+								   <Text style={{color:"#f20583",fontSize:15}} >清空历史记录</Text>
 								</TouchableOpacity>
 								</View>
 					</ScrollView>:
@@ -197,7 +197,6 @@ const styles = StyleSheet.create({
 	  hotSearchText:{
 			fontSize:15,
 			color:"#333333",
-			fontFamily:"黑体",
 			marginLeft:4
 	  },
 	  hotSearchData:{
@@ -218,7 +217,7 @@ const styles = StyleSheet.create({
 	  hotDataText:{
 			fontSize:12,
 			color:"#333333",
-			fontFamily:"黑体"
+
 	  },
 	  hisDataItemsView:{
 			borderBottomColor:"#d9d9d9",
@@ -233,8 +232,7 @@ const styles = StyleSheet.create({
 	  },
 	  hisDataText:{
 			fontSize:13,
-			color:"#333333",
-			fontFamily:"黑体"
+			color:"#333333"
 	  },
 	  hotSearchArrow:{
 			width:12,

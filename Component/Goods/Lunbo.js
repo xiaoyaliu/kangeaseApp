@@ -127,7 +127,7 @@ var styles = StyleSheet.create({
 	  circleIcon:{
 			color:"#fff",
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  }
 });
 module.exports=Thumb;

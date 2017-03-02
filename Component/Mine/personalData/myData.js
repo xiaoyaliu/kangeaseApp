@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 			width:96,
 			fontSize:13,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
 	  styleRight:{
 			width:Util.size.width-106,

@@ -37,9 +37,9 @@ class Cart extends Component {
 								<TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.leftViewStyle}>
 									  <Image source={{uri:'back_icon'}} style={styles.backImg}/>
 								</TouchableOpacity>
-								<Text style={{color:"#333333",fontSize:16,fontFamily:"黑体"}}>购物车</Text>
+								<Text style={{color:"#333333",fontSize:16}}>购物车</Text>
 								<TouchableOpacity style={styles.rightViewStyle}>
-								   <Text style={{color:"#333333",fontSize:14,fontFamily:"黑体",textAlign:'right' }}>编辑</Text>
+								   <Text style={{color:"#333333",fontSize:14,textAlign:'right' }}>编辑</Text>
 								</TouchableOpacity>
 						  </View>
 
@@ -56,7 +56,7 @@ class Cart extends Component {
 						  <View style={styles.bottomFix}>
 						     <TouchableOpacity style={styles.checkAll}>
 								   <Image source={{uri:"checked_circle_icon"}} style={styles.circleIcon} resizeMode="stretch"/>
-								   <Text style={{color:"#333333",fontSize:14,fontFamily:"黑体",marginLeft:2}}>全选</Text>
+								   <Text style={{color:"#333333",fontSize:14,marginLeft:2}}>全选</Text>
 							 </TouchableOpacity>
 								<TouchableOpacity style={styles.checkout} onPress={()=>this._jumpFocus(OrderSure, "确认订单")}>
 									  <Text style={styles.checkoutText}>结算</Text>
@@ -107,11 +107,11 @@ class Cart extends Component {
 								</View>
 								<View style={styles.changeNumView}>
 									  <TouchableOpacity style={styles.changeNum}>
-											<Text style={{fontFamily:"黑体",fontSize:16,color:"#333"}}>-</Text>
+											<Text style={{fontSize:16,color:"#333"}}>-</Text>
 									  </TouchableOpacity>
 									  <TextInput keyboardType="numeric" style={styles.inputNum} underlineColorAndroid='transparent'/>
 									  <TouchableOpacity style={styles.changeNum}>
-											<Text style={{fontFamily:"黑体",fontSize:16,color:"#333"}}>+</Text>
+											<Text style={{fontSize:16,color:"#333"}}>+</Text>
 									  </TouchableOpacity>
 								</View>
 						  </View>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
 	  nav:{
 			backgroundColor:"#fff",
 			alignItems:'center',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?58:44,
 			paddingTop:Platform.OS==='ios'?15:0,
 			justifyContent:'center',
 			borderBottomWidth:1,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
 			left:Platform.OS==='ios'?3:4,
-			bottom:Platform.OS==='ios'?18:10,
+			bottom:Platform.OS==='ios'?6:10,
 			alignItems:'center',
 			justifyContent:'center'
 
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 	  },
 	  rightViewStyle:{
 			position:'absolute',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?43:44,
 			bottom:0,
 			width:34,
 			right:10,
@@ -225,13 +225,11 @@ const styles = StyleSheet.create({
 			marginLeft:10
 	  },
 	  goods_name:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333333",
 			lineHeight:18
 	  },
 	  goods_price:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#323232",
 			marginTop:20

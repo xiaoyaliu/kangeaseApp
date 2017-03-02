@@ -36,7 +36,7 @@ class InsertStaff extends Component{
 
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1} onPress={()=>this.SubmitDay()}>
-								<Text style={{color:this.state.finish?"#ffffff":"#e6a4c0",fontSize:15,fontFamily:"黑体"}}>确定</Text>
+								<Text style={{color:this.state.finish?"#ffffff":"#e6a4c0",fontSize:15,}}>确定</Text>
 						  </TouchableOpacity>
 
 					</View>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 			width:76,
 			fontSize:13,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
 	  styleRight:{
 			width:Util.size.width-86,

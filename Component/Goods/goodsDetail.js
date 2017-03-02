@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
 	  text999:{
 			fontSize:12,
 			color:"#999999",
-			fontFamily:"黑体"
+
 	  },
 	  text333:{
 			fontSize:12,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
       detail:{
              backgroundColor:"#fff",

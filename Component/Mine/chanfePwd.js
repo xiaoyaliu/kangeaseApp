@@ -47,7 +47,7 @@ export default class ChangePwd extends Component{
 
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:15,fontFamily:"黑体"}}>保存</Text>
+								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:15}}>保存</Text>
 						  </TouchableOpacity>
 
 					</View>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 			width:76,
 			fontSize:13,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
 	  styleRight:{
 			width:Util.size.width-86,
@@ -100,8 +100,7 @@ const styles = StyleSheet.create({
 	  },
 	  getCodeText:{
 			color:"#f20583",
-			fontSize:13,
-			fontFamily:"黑体",
+			fontSize:13
 	  },
 	  loginBtn:{
 			height:Platform.OS=='ios'?50:44,

@@ -59,7 +59,7 @@ class Goods extends Component {
 
 								 </View>
 								 <TouchableOpacity style={styles.goEvaluate} onPress={()=>this.props.goEvaluate()}>
-									   <Text style={{fontSize:11,color:"#999",fontFamily:"黑体"}}>查看全部评价</Text>
+									   <Text style={{fontSize:11,color:"#999",}}>查看全部评价</Text>
 								 </TouchableOpacity>
 						   </View>
 						 <View style={styles.bottomView}>
@@ -82,30 +82,28 @@ const styles = StyleSheet.create({
 	  text1:{
 			fontSize:11,
 			color:"#999",
-            fontFamily:"黑体",
 			marginTop:2
 	  },
 	  text2:{
 			fontSize:14,
 			color:"#f10583",
-			fontFamily:"微软雅黑",
 			marginTop:4
 	  },
        text3:{
 			 marginTop:4,
 	          fontSize:13,
 			  color:"#333333",
-			  fontFamily:"黑体"
+
           },
            text5:{
 	          fontSize:11,
 			  color:"#333333",
-			  fontFamily:"黑体"
+
           },
 	  text4:{
 			fontSize:10,
 			color:"#999",
-			fontFamily:"黑体"
+
 	  },
 	  star:{
 			width:12,

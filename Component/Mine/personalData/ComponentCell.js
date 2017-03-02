@@ -20,7 +20,7 @@ class CommonCell extends Component {
 					<TouchableOpacity style={styles.container} disabled={this.props.navigator?false:true} onPress={()=>this.jump()}>
 						  <View style={[styles.cell,this.style]}>
 						  {/*左边*/}
-						  <Text style={{marginLeft:10,fontSize:13,color:'#666',fontFamily:"黑体"}}>{this.props.title}</Text>
+						  <Text style={{marginLeft:10,fontSize:13,color:'#666',}}>{this.props.title}</Text>
 						  {/*右边*/}
 						  {this.renderRightView()}
 						  </View>
@@ -40,7 +40,7 @@ class CommonCell extends Component {
 	  rightTitle(){
 			if(this.props.rightTitle&&this.props.rightTitle.length>0){
 				  return(
-						  <Text style={{marginRight:10,fontSize:12,color:'#b2b2b2',fontFamily:"黑体"}}>{this.props.rightTitle}</Text>
+						  <Text style={{marginRight:10,fontSize:12,color:'#b2b2b2',}}>{this.props.rightTitle}</Text>
 				  )
 			}
 	  }

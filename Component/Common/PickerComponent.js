@@ -41,7 +41,7 @@ export default class Picker extends Component{
 								  <View style={styles.pickItem} key={i}>
 
 								  <TouchableOpacity style={styles.pickItemTouch} onPress={(index,name)=>{child.props.isPop?this.jump(child.props.isPop,child.props.value):this.update(child.props.value,child.props.label)}}>
-								     <Text style={{fontSize:12,fontFamily:'黑体'}}>{child.props.label}</Text>
+								     <Text style={{fontSize:12}}>{child.props.label}</Text>
 										{this.getCheck(child.props.value)}
 								  </TouchableOpacity>
 
@@ -120,8 +120,7 @@ const styles = StyleSheet.create({
 			justifyContent:'center',
 	  },
 	  itemTitleName:{
-			fontSize:14,
-			fontFamily:'黑体'
+			fontSize:14
 	  },
 	  pickItem:{
 			marginLeft:12

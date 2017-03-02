@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
 	  title:{
 			fontSize:12,
 			color:"#999999",
-			fontFamily:"黑体",
 			marginLeft:18,
 			marginRight:18
 	  }

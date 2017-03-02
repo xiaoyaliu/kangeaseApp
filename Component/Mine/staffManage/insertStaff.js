@@ -80,7 +80,7 @@ class InsertStaff extends Component{
 								</View>
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>保存</Text>
+								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,}}>保存</Text>
 						  </TouchableOpacity>
 						  {this.state.picker1&&
 						  <Picker itemTitleName="等级" selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker1:show})}>
@@ -166,8 +166,7 @@ const styles = StyleSheet.create({
 			paddingLeft:10,
 			width:96,
 			fontSize:13,
-			color:"#333",
-			fontFamily:"黑体"
+			color:"#333"
 	  },
 	  styleRight:{
 			width:Util.size.width-106
@@ -195,20 +194,19 @@ const styles = StyleSheet.create({
 			width:Util.size.width,
 			height:Platform.OS==='ios'?44:38,
 			borderBottomColor:"#b3b3b3",
-			borderBottomWidth:Util.pixel,
+			borderBottomWidth:1,
 			alignItems:'center',
-			justifyContent:'center',
+			justifyContent:'center'
 	  },
 	  itemTitleName:{
-			fontSize:14,
-			fontFamily:'黑体'
+			fontSize:14
 	  },
 	  pickItem:{
 			marginLeft:12
 	  },
 	  pickItemTouch:{
 			borderBottomColor:"#ccc",
-			borderBottomWidth:Util.pixel,
+			borderBottomWidth:1,
 			height:Platform.OS==='ios'?66:60,
 			justifyContent:'center',
 			width:Util.size.width-24

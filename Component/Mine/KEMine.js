@@ -10,7 +10,8 @@ import {
 		View,
 		Image,
 		TouchableOpacity,
-		Platform
+		Platform,
+        ScrollView
 		} from 'react-native';
 
 import Util from './../Common/util';
@@ -29,12 +30,13 @@ class KEMine extends Component{
 	  render() {
 			return (
 					<View style={styles.container}>
+		                  <ScrollView>
 						  {/*header*/}
 						  <View style={styles.header}>
 								<Text style={[styles.text,{fontSize:15}]}>个人中心</Text>
 								<View style={styles.myMessage}>
 									  <Image source={{uri:"head"}} style={styles.head}/>
-									  <Text style={[styles.text,{fontSize:12,marginTop:4,marginBottom:2}]}>测试</Text>
+									  <Text style={[styles.text,{fontSize:12,marginTop:Platform.OS==='ios'?8:4,marginBottom:2}]}>测试</Text>
 									  <Text style={[styles.text,{fontSize:12}]}>积分：333</Text>
 								</View>
 						  </View>
@@ -63,6 +65,7 @@ class KEMine extends Component{
 						  <View style={{marginTop:10}}>
 								<CommonCell title="关于康亿"/>
 						  </View>
+				      </ScrollView>
 					</View>
 			);
 	  }
@@ -76,17 +79,17 @@ const styles = StyleSheet.create({
 
 	  },
 	  header:{
-			height:Util.size.height*0.33,
+			height:Util.size.height*0.35,
 			backgroundColor:"#f20583",
 			alignItems:'center',
 			justifyContent:'space-between',
-			paddingTop:25,
-			paddingBottom:25
+			paddingTop:Platform.OS==='ios'?32:25,
+			paddingBottom:Platform.OS==='ios'?36:25
 	  },
 	  head:{
 			width:70,
 			height:70,
-			borderRadius:70,
+			borderRadius:35,
 			borderColor:"#fff",
 			borderWidth:1
 	  },
@@ -95,8 +98,7 @@ const styles = StyleSheet.create({
 			justifyContent:'center'
 	  },
 	  text:{
-			color:"#fff",
-			fontFamily:"黑体"
+			color:"#fff"
 	  },
 	  goodsState:{
 			padding:10,
@@ -114,16 +116,17 @@ const styles = StyleSheet.create({
 	  },
       textA:{
 	        color:"#666",
-	     	fontFamily:"黑体",
 			fontSize:12
 	  },
 	  img1:{
 			width:21,
-			height:19
+			height:19,
+		    marginBottom:Platform.OS==='ios'?6:2
 	  },
 	  img2:{
 			width:19,
-			height:19
+			height:19,
+		  marginBottom:Platform.OS==='ios'?6:2
 	  }
 
 });

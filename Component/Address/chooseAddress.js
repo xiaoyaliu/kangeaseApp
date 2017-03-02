@@ -34,9 +34,9 @@ class ChooseAddress extends Component {
 								<TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.leftViewStyle}>
 									  <Image source={{uri:'back_icon'}} style={styles.backImg}/>
 								</TouchableOpacity>
-								<Text style={{color:"#333333",fontSize:16,fontFamily:"黑体"}}>选择收货地址</Text>
+								<Text style={{color:"#333333",fontSize:16,}}>选择收货地址</Text>
 								<TouchableOpacity style={styles.rightViewStyle} onPress={()=>this._jumpFocus(manageAddress,"管理收货地址")}>
-									  <Text style={{color:"#333333",fontSize:14,fontFamily:"黑体",textAlign:'right' }}>管理</Text>
+									  <Text style={{color:"#333333",fontSize:14,textAlign:'right' }}>管理</Text>
 								</TouchableOpacity>
 						  </View>
 						  {this.state.isShow&&
@@ -47,7 +47,7 @@ class ChooseAddress extends Component {
 										/>
 						  </ScrollView>}
 						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>{this.update()}}>
-								<Text style={{color:"#ffffff",fontSize:15,fontFamily:"黑体"}}>新增收货地址</Text>
+								<Text style={{color:"#ffffff",fontSize:15,}}>新增收货地址</Text>
 						  </TouchableOpacity>
 
 					</View>
@@ -173,13 +173,11 @@ const styles = StyleSheet.create({
 			width:Util.size.width-60,
 			justifyContent:'space-between',
 	  } ,text1:{
-			fontFamily:"黑体",
 			fontSize:13,
 			color:"#333"
 	  },text2:{
 			marginTop:6,
 			lineHeight:16,
-			fontFamily:"黑体",
 			fontSize:11,
 			color:"#333"
 	  },

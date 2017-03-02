@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 	  nav:{
 			backgroundColor:"#fff",
 			alignItems:'center',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?60:44,
 			paddingTop:Platform.OS==='ios'?15:0,
 			justifyContent:'center',
 			borderBottomWidth:1,
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
 			left:Platform.OS==='ios'?3:4,
-			bottom:Platform.OS==='ios'?18:10,
+			bottom:Platform.OS==='ios'?6:10,
 			alignItems:'center',
 			justifyContent:'center'
 
@@ -239,12 +239,12 @@ const styles = StyleSheet.create({
 			width:38,
 			height:2,
 			backgroundColor:"#f20583",
-			bottom:0,
+			bottom:Platform.OS==='ios'?2:0,
 			zIndex:3
 	  },
 	  textOne:{
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  },
 	  circle:{
 			flexDirection:'row',
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
 	  circleIcon:{
 			color:"#fff",
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  },
 	  bottomCommon:{
 			height:Platform.OS==='ios'?54:48,
@@ -290,12 +290,11 @@ const styles = StyleSheet.create({
 	  textA:{
 			color:"#fff",
 			fontSize:14,
-			fontFamily:"黑体"
+
 	  },
 	  textB:{
 			color:"#999",
 			fontSize:10,
-			fontFamily:"黑体",
 			marginTop:2
 	  },
 	  cartNum:{
@@ -309,8 +308,7 @@ const styles = StyleSheet.create({
 	  },
 	  textC:{
 			color:"#fff",
-			fontSize:10,
-			fontFamily:"微软雅黑"
+			fontSize:10
 	  }
 });
 module.exports=Goods;

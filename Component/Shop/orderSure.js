@@ -46,8 +46,8 @@ class OrderSure extends Component {
                                 <View style={styles.goodsList}>
 									  {this.renderGoodsList()}
 									  <View style={styles.priceItem}>
-									      <Text style={[styles.text2,{lineHeight:32}]}>共3件商品&nbsp;&nbsp;小计：<Text style={{color:"#f20583",fontFamily:"微软雅黑",fontSize:15}}>¥129.00</Text></Text>
-											<Text style={styles.text2}>运费：<Text style={{color:"#f20583",fontFamily:"微软雅黑"}}>¥8.00</Text></Text>
+									      <Text style={[styles.text2,{lineHeight:32}]}>共3件商品&nbsp;&nbsp;小计：<Text style={{color:"#f20583",fontSize:15}}>¥129.00</Text></Text>
+											<Text style={styles.text2}>运费：<Text style={{color:"#f20583"}}>¥8.00</Text></Text>
 									  </View>
 								</View>
 								{/*实名认证*/}
@@ -71,7 +71,7 @@ class OrderSure extends Component {
 						  </ScrollView>
 						  <View style={styles.bottomFix}>
 								<Text style={styles.text3}>实付金额：</Text>
-								<Text style={{color:"#f20583",fontFamily:"微软雅黑",fontSize:16}}>¥300.00</Text>
+								<Text style={{color:"#f20583",fontSize:16}}>¥300.00</Text>
 								<TouchableOpacity style={styles.checkout} onPress={()=>this._jumpFocus(OrderSure, "确认订单")}>
 									  <Text style={styles.checkoutText}>结算</Text>
 								</TouchableOpacity>
@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
 			marginRight:40
 	  },
 	  text1:{
-            fontFamily:"黑体",
 			fontSize:14,
 			color:"#333"
 	  },
@@ -190,7 +189,6 @@ const styles = StyleSheet.create({
 	  addressAddress:{
 			width:Util.size.width-73,
 			fontSize:12,
-			fontFamily:"黑体",
 			color:"#333",
 			lineHeight:18
 	  },
@@ -206,13 +204,11 @@ const styles = StyleSheet.create({
 			marginLeft:10
 	  },
 	  goods_name:{
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333333",
 			lineHeight:18
 	  },
 	  goods_price:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#323232",
 			marginTop:26
@@ -228,7 +224,6 @@ const styles = StyleSheet.create({
 	  },
 	  text2:{
 			textAlign:'right',
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#333"
 	  },
@@ -246,18 +241,15 @@ const styles = StyleSheet.create({
 			alignItems:'center',
 	  },
 	  text3:{
-			fontFamily:"黑体",
 			fontSize:13,
 			color:"#333"
 	  },
 	  text4:{
 			textAlign:'right',
-			fontFamily:"黑体",
 			fontSize:12,
 			color:"#343434"
 	  },
 	  text5:{
-			fontFamily:"微软雅黑",
 			fontSize:12,
 			color:"#343434"
 	  },

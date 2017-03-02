@@ -46,9 +46,8 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?50:44
 	  },
 	  item1:{
-			backgroundColor:"#fff",
-			borderTopColor:"#b3b3b3",
-			borderTopWidth:0.5
+		   height:Platform.OS==='ios'?50:44,
+			backgroundColor:"#fff"
 	  }
 });
 module.exports=BottomCommon

@@ -45,7 +45,7 @@ class DeleteStaff extends Component{
 								<TouchableOpacity style={styles.checkAll}>
 									  {this.state.selectAll?<Image source={{uri:"checked_circle_icon"}} style={styles.circleIcon} resizeMode="stretch"/>:
 									  <View style={styles.degStyle}></View>}
-									  <Text style={{color:"#333333",fontSize:14,fontFamily:"黑体",marginLeft:2}}>全选</Text>
+									  <Text style={{color:"#333333",fontSize:14,marginLeft:2}}>全选</Text>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.checkout} onPress={()=>this.delete()}>
 									  <Text style={styles.checkoutText}>删除</Text>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
 			position:'absolute',
 			bottom:0,
 			left:0,
-			borderTopWidth:0.5,
+			borderTopWidth:1,
 			borderTopColor:"#b3b3b3"
 	  },
 	  checkAll:{

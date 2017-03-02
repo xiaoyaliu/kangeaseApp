@@ -90,12 +90,11 @@ const styles = StyleSheet.create({
 	  text4:{
 			fontSize:10,
 			color:"#999",
-			fontFamily:"黑体"
+
 	  },
 	  text5:{
 			fontSize:11,
 			color:"#333333",
-			fontFamily:"黑体",
 			lineHeight:18,
 			marginBottom:2
 	  },

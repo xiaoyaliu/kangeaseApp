@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 			flexDirection:'row',
 			alignItems:'center',
 			justifyContent:'center',
-			height:Platform.OS==='ios'?54:48,
+			height:Platform.OS==='ios'?64:48,
 			paddingTop:Platform.OS==='ios'?15:0,
 			borderBottomWidth:1,
 			borderBottomColor:'#b3b3b3'
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 	  viewSearch:{
 			width:Util.size.width-70,
 			borderRadius:3,
-			height:Platform.OS==='ios'?36:32,
+			height:Platform.OS==='ios'?34:32,
 			backgroundColor:"#e6e6e6",
 			flexDirection:'row',
 			alignItems:'center',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 	  },
 	  TextInputStyle:{
 			width:Util.size.width-120,
-			height:Platform.OS==='ios'?36:32,
+			height:Platform.OS==='ios'?34:32,
 			marginLeft:2,
 			paddingTop:0,
 			paddingBottom:0
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
 	  },
 	  cancelSearchText:{
 			fontSize:14,
-			fontFamily:"黑体",
 			color:"#333333"
 	  }
 

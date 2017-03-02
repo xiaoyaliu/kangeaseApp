@@ -31,7 +31,7 @@ export default class LaunchImage extends Component{
 
 						  <View style={styles.main}>
 								<TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>{this.update()}}>
-									  <Text style={{color:"#ffffff",fontSize:15,fontFamily:"黑体"}}>我已阅读并同意该条款约定</Text>
+									  <Text style={{color:"#ffffff",fontSize:15}}>我已阅读并同意该条款约定</Text>
 								</TouchableOpacity>
 						  </View>
 

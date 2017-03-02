@@ -43,7 +43,7 @@ class ManageAddress extends Component {
 								{this.renderRow()}
 						  </ScrollView>}
 						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>{Util._jumpFocus(this.props.navigator,newAddress,"新增收货地址")}}>
-								<Text style={{color:"#ffffff",fontSize:15,fontFamily:"黑体"}}>新增收货地址</Text>
+								<Text style={{color:"#ffffff",fontSize:15,}}>新增收货地址</Text>
 						  </TouchableOpacity>
                            </View>
 
@@ -180,17 +180,14 @@ const styles = StyleSheet.create({
 			flexDirection:'row',
 			justifyContent:'space-between',
 	  } ,text1:{
-			fontFamily:"黑体",
 			fontSize:13,
 			color:"#333"
 	  },text2:{
 			marginTop:4,
-			fontFamily:"黑体",
 			fontSize:11,
 			color:"#333"
 	  },
 		text3:{
-			  fontFamily:"黑体",
 			  fontSize:12,
 			  color:"#333"
 },

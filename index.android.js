@@ -20,7 +20,7 @@ class XMGStart extends Component{
   render(){
     return(
             <Navigator
-                    initialRoute={{name: "启动页", component: Order}}
+                    initialRoute={{name: "启动页", component: LaunchPage}}
                     configureScene={()=>{return Navigator.SceneConfigs.VerticalUpSwipeJump}}
                     renderScene={(route, navigator) =>{
                                let Component=route.component;

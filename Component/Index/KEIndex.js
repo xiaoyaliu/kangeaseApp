@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
 	  },
 	  header:{
 			flexDirection:'row',
-			height:Platform.OS==='ios'?66:50,
+			height:Platform.OS==='ios'?72:50,
+		    paddingTop:Platform.OS==='ios'?12:0,
 			paddingLeft:10,
 			paddingRight:10,
 			backgroundColor:"#f20583",
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
 	  searchLogo:{
 			width:Platform.OS==='ios'?16:14,
 			height:Platform.OS==='ios'?16:14,
-			marginLeft:4,
+			marginLeft:Platform.OS==='ios'?6:4,
+		    marginRight:Platform.OS==='ios'?2:0,
 	  },
 	  searchInput:{
 			width:Platform.OS==='ios'?Util.size.width-122:Util.size.width-114,

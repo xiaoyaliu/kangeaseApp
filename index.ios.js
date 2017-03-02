@@ -13,8 +13,8 @@ import {
         Navigator
         } from 'react-native';
 
-import LaunchPage from './Component/Main/XMGLauchpage'
-var Main=require('./Component/Main/XMGMain')
+import LaunchPage from './Component/Main/KELauchpage'
+//var Main=require('./Component/Main/XMGMain')
 class XMGStart extends Component{
   render(){
     return(
@@ -32,4 +32,4 @@ class XMGStart extends Component{
 
 }
 
-AppRegistry.registerComponent('kangeaseApp', () => XMGStart);
+AppRegistry.registerComponent('Test', () => XMGStart);

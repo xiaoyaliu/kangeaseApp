@@ -79,7 +79,7 @@ class EditStaff extends Component{
 								</View>
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>保存</Text>
+								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,}}>保存</Text>
 						  </TouchableOpacity>
 						  {this.state.picker1&&
 						  <Picker selectedValue={this.state.rankValue} selectedName={this.state.rankName} onValueChange={(value,name,show) => this.setState({rankValue: value,rankName:name,picker1:show})}>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 			width:96,
 			fontSize:13,
 			color:"#333",
-			fontFamily:"黑体"
+
 	  },
 	  styleRight:{
 			width:Util.size.width-106
@@ -199,8 +199,7 @@ const styles = StyleSheet.create({
 			justifyContent:'center',
 	  },
 	  itemTitleName:{
-			fontSize:14,
-			fontFamily:'黑体'
+			fontSize:14
 	  },
 	  pickItem:{
 			marginLeft:12

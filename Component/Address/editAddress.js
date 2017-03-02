@@ -51,7 +51,7 @@ export default class LaunchImage extends Component{
 								</View>
 						  </View>
 						  <TouchableOpacity style={[{backgroundColor:this.state.finish?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
-								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,fontFamily:"黑体"}}>保存</Text>
+								<Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,}}>保存</Text>
 						  </TouchableOpacity>
 					</View>
 			);
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?38:32,
 			paddingTop:0,
 			paddingBottom:0,
-			fontFamily:"黑体",
 			fontSize:13
 	  },
 	  item:{
