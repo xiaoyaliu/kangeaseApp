@@ -14,7 +14,6 @@ import {
 		ScrollView,
 		Animated,
 		TouchableOpacity,
-		Alert
 		} from 'react-native';
 var screenWidth=Util.size.width;
 import Util from './../Common/util';
@@ -23,7 +22,6 @@ var dataTest=require('./../data/cart.json');
 import GoodsGoods from './goodsGoods';
 import GoodsDetail from './goodsDetail';
 import GoodsEvaluate from './goodsEvaluate';
-var img=[];
 var start=0;
 var timestamp=0
 class Goods extends Component {
@@ -34,11 +32,12 @@ class Goods extends Component {
 				  isShow: false,
 				  currentPage:0,
 				  item:0,
-				  top:0,
-				  scrollEnabled:false
+				  scrollEnabled:false,
+				  isShowDetail:false,
+				  isShowEvaluate:false,
+				  cartNum:0
 			}
 	  }
-
 	  render() {
 			return (
 					<View style={styles.container}>
@@ -71,15 +70,14 @@ class Goods extends Component {
 									  <ScrollView style={styles.scrollPage}
 												  onScrollBeginDrag={(e) =>this.ScrollGoodsStart(e)}
 												  onScrollEndDrag={(e) =>this.ScrollGoodsEnd(e)}
-												  onMomentumScrollEnd ={(e) => this.onScrollEnd(e)}
 											  >
-											<GoodsGoods changeEnabled={(value)=>this.setState({scrollEnabled:value})} num={10} goEvaluate={()=>this.scrollToView(2)}/>
+											<GoodsGoods data={this.state.goods} goodsFirstComment={this.state.goodsFirstComment?this.state.goodsFirstComment:""} changeEnabled={(value)=>this.setState({scrollEnabled:value})} num={this.state.num} goEvaluate={()=>this.scrollToView(2)}/>
 									  </ScrollView>
 									  <ScrollView style={styles.scrollPage}>
-											<GoodsDetail/>
+											{this.state.isShowDetail&&<GoodsDetail  data={this.state.content} goodsMsg={this.state.goods} />}
 									  </ScrollView>
 									  <ScrollView style={styles.scrollPage}>
-										   <GoodsEvaluate/>
+											{this.state.isShowEvaluate&&<GoodsEvaluate  data={this.state.comment} num={this.state.num}/>}
 									  </ScrollView>
 								</ScrollView>
 							</View>:null}
@@ -87,8 +85,8 @@ class Goods extends Component {
 						  <View style={styles.bottomCommon}>
 								<TouchableOpacity style={styles.goCart}>
 								    <Image source={{uri:"tabbar_cart"}} style={{width:18,height:18,marginTop:4}}/>
-									  <Text style={styles.textB}>{this.state.currentPage}购物车</Text>
-									  <View style={styles.cartNum}><Text style={styles.textC}>40</Text></View>
+									  <Text style={styles.textB}>购物车</Text>
+									  <View style={styles.cartNum}><Text style={styles.textC}>{this.state.cartNum}</Text></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.joinCart}>
 									  <Text style={styles.textA}>加入购物车</Text>
@@ -102,15 +100,44 @@ class Goods extends Component {
 
 	  }
 	  componentDidMount(){
-			img=["http://www.kangease.com/images/goods/20160614/f8787da6f335272ef5e12d613adcb1ae175749wkqtdj.jpg","http://www.kangease.com/images/goods/20160614/7d81255d1deda11c432a10e34c45ba5d210615lsp39i.jpg","http://www.kangease.com/images/goods/20160614/d41ca01a89af2eb2c9b275a24f2edc65210615owq2cv.jpg"]
-			this.setState({
-				  isShow:true
-			});
+			this._fetchData()
 	  }
-	  /*首页商品列表数据*/
-	  _fetchData(callback){
+	  /*初始化详情页数据*/
+	  _fetchData(){
+			var self = this;
+			let formData = new FormData();
+			formData.append("act", "getGoodDetail");
+			formData.append("gid",this.props.id);
+			Util.get(formData, function (data) {
+				  if (data.flag > 0) {
+						var num=data.data.comment.length;
 
+						console.log(data)
+						self.setState({
+							  isShow:true,
+							  cartNum:data.data.cartGoodsNum,
+							  goods:data.data.goods,
+							  content:data.data.content,
+							  comment:data.data.comment,
+							  num:num
+						})
+						console.log(num)
+						if(num>0){
+							  self.setState({
+									goodsFirstComment: data.data.comment[0]
+							  })
 
+						}
+						self.setState({
+							  isShow:true})
+				  }else{
+						if(data.flag.msg!=""){
+							  Util.toast(data.flag.msg)
+						}
+				  }
+
+			}, function (err) {
+			})
 	  }
 
 	  ScrollGoodsStart(e){
@@ -123,12 +150,12 @@ class Goods extends Component {
 				  this.scrollToView(1)
 			}
 	  }
-	  onScrollEnd(e){
+	 /* onScrollEnd(e){
 			this.setState({
 				  top: -e.nativeEvent.contentOffset.y,
 			});
 
-	  }
+	  }*/
 //当一帧滚动完毕的时候调用
 	  onAnimationEnd(e){
 			//求出水平方向偏移量
@@ -153,12 +180,24 @@ class Goods extends Component {
 						currentPage:currentPage,
 						fadeAnim:new Animated.Value(value)
 				  })
+				  if(currentPage==1&&!this.state.isShowDetail){
+						this.setState({isShowDetail:true});
+				  }
+				  else if(currentPage==2&&!this.state.isShowEvaluate){
+						this.setState({isShowEvaluate:true});
+				  }
 			}
 	  }
 	  scrollToView(item){
 			var scrollView=this.refs.scrollView;
 			var value=6+50*item;
 			if(this.state.currentPage!=item){
+				  if(item==1&&!this.state.isShowDetail){
+						this.setState({isShowDetail:true});
+				  }
+				  else if(item==2&&!this.state.isShowEvaluate){
+						this.setState({isShowEvaluate:true});
+				  }
 				  Animated.timing(
 						  this.state.fadeAnim,
 						  {toValue: value,

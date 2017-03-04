@@ -79,7 +79,7 @@ var Thumb = React.createClass({
 			for(var i=0;i<img.length;i++){
 				  allChild.push(
 						  <View activeOpacity={1} key={i} style={{width:screenWidth,height:screenWidth,alignItems:'center',justifyContent:'center',backgroundColor:"#fff"}}>
-								<Image  source={{uri:img[i]}} style={{width:screenWidth-40,height:screenWidth-40}} />
+								<Image  source={{uri:img[i].imgUrl}} style={{width:screenWidth-40,height:screenWidth-40}} />
 						  </View>
 				  )
 			}

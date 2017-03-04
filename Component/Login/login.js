@@ -11,22 +11,25 @@ import {
 		Image,
 		TextInput,
 		TouchableOpacity,
-		Platform
+		Platform,
+		Alert
 		} from 'react-native';
 
 import Util from './../Common/util';
-
 import Reg from './../Reg/reg';
-import ForgetPwd from './../Login/forgetPwd';
+import ForgetPwd from './../Login/forgetPwdFirst';
+import KEMain from './../Main/KEMain';
 export default class LaunchImage extends Component{
 	  constructor(props) {
 			super(props);
+			//初始化状态
 			this.state={
-				  login:false,
+				  login:false,//是否可登录
 				  nameClear:false,
 				  pwdClear:false,
 				  nameValue:"",
-				  pwdValue:""
+				  pwdValue:"",
+				  error:""
 			}
 	  }
 	  render() {
@@ -36,31 +39,31 @@ export default class LaunchImage extends Component{
 						  <Image  source={{uri:'logo'}} style={{width:Util.size.width*0.51,height:Util.size.width*0.072,marginTop:40}} />
 						  </View>
 						  <View style={styles.LoginView}>
-								<Text style={styles.error}>您输入的用户名或密码不正确</Text>
+								<Text style={styles.error}>{this.state.error}</Text>
 								{Platform.OS=='ios'?
 								<View>
 									  <View style={{marginTop:10}}>
 											<View>
-											 <TextInput clearButtonMode="while-editing" onChangeText ={(value)=>this.setState({nameValue:value})} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8"/>
+											 <TextInput clearButtonMode="while-editing" onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.setState({nameValue:value})} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8"/>
 											</View>
 
 									  </View>
 									  <View style={{marginTop:10}}>
 											<View>
-											  <TextInput clearButtonMode="while-editing" onChangeText ={(value)=>this.setState({pwdValue:value})} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} />
+											  <TextInput clearButtonMode="while-editing" returnKeyType="go" onSubmitEditing={()=>this.submitLogin()} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.setState({pwdValue:value})} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} />
 											</View>
 									  </View>
 								</View>:
 										<View>
 											  <View style={{marginTop:10}}>
 													<View>
-														  <TextInput onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
+														  <TextInput maxLength={16} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
 													</View>
 													{this.renderNameClear()}
 											  </View>
 											  <View style={{marginTop:10}}>
 													<View>
-														  <TextInput onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
+														  <TextInput maxLength={20} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
 													</View>
 													{this.renderPwdClear()}
 											  </View>
@@ -71,7 +74,7 @@ export default class LaunchImage extends Component{
 											<Text style={{color:"#ffffff",fontSize:12,}}>忘记密码?</Text>
 									  </TouchableOpacity>
 								</View>
-								<TouchableOpacity style={[{backgroundColor:this.state.login?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1}>
+								<TouchableOpacity style={[{backgroundColor:this.state.login?"#f20583":"#cc046f"},styles.loginBtn]} activeOpacity ={1} onPress={()=>this.submitLogin()}>
 									  <Text style={{color:this.state.login?"#ffffff":"#e6a4c0",fontSize:16,}}>登录</Text>
 								</TouchableOpacity>
 						  </View>
@@ -86,6 +89,7 @@ export default class LaunchImage extends Component{
 			this.setState({
 				  nameValue:value
 			});
+
          if(value==""){
 			   this.setState({
 					 nameClear:false
@@ -94,6 +98,12 @@ export default class LaunchImage extends Component{
 			   this.setState({
 					 nameClear:true
 			   })
+			   if(value>2&&this.state.pwdValue.length>5){
+					 this.setState({
+						   login:true,
+						   error:""
+					 })
+			   }
 		 }
 	  }
 	  //用户名清空按钮显示判断
@@ -129,37 +139,93 @@ export default class LaunchImage extends Component{
 				  this.setState({
 						pwdClear:false
 				  })
+
 			}else{
 				  this.setState({
 						pwdClear:true
 				  })
+				  if(this.state.nameValue.length>2&&value.length>5){
+						this.setState({
+							  login:true,
+							  error:""
+						})
+				  }
 			}
 	  }
+	  //清空用户名
 	  clearNameContent(){
 			this.setState({
 				  nameClear:false,
-				  nameValue:""
+				  nameValue:"",
+				  login:false
 			});
 	  }
+	  //清空密码
 	  clearPwdContent(){
 			this.setState({
 				  pwdClear:false,
-				  pwdValue:""
+				  pwdValue:"",
+				  login:false
 			});
 	  }
-	  _jump(component, title){
-			const navigator = this.props.navigator;
-			if (navigator){
-				  navigator.push({
-						component: component,
-						title: title,
-						params: {
+	  //判断是否可登陆
+	  changeLoginState(){
+			//隐藏清除按钮
+			this.setState({
+				  pwdClear:false,
+				  nameClear:false
+			});
+			if(this.state.nameValue==""||this.state.pwdValue==""){
+				  return false;
+			}
+			if(this.state.nameValue.length>2&&this.state.pwdValue.length>5){
+				  this.setState({
+						login:true,
+						error:""
+				  })
 
-						}
-				  });
+			}else{
+				  this.setState({
+						login:false
+				  })
 			}
 	  }
+	  //跳转
+	  _jump(component, title) {
+			const navigator = this.props.navigator;
+			Util._jumpFocus(navigator, component, title)
+	  }
+	  //提交登陆
+	  submitLogin(){
 
+			if(this.state.login){
+                  var self=this;
+				  let formData = new FormData();
+				  formData.append("act","userLogin");
+				  formData.append("username",self.state.nameValue);
+				  formData.append("password",self.state.pwdValue);
+				  Util.get(formData,function(data) {
+						if(data.flag){
+							  Util.setStorage("username",data.info.user_name)
+							  Util.setStorage("userId",data.info.user_id)
+							  let time=new Date();
+							  Util.setStorage("time",time)
+							  self._jump(KEMain)
+						}else{
+							  self.setState({
+								   error:data.msg
+							 })
+						}
+
+				  },function(err){
+						console.log(err)
+				  })
+			}else{
+				  this.setState({
+						error: "用户名或密码输入不正确"
+				  })
+			}
+	  }
 }
 const styles = StyleSheet.create({
 	  container:{
@@ -196,13 +262,12 @@ const styles = StyleSheet.create({
 	  BottomBtn:{
 			width:86,
 			height:40,
-			alignItems:'center',
+			alignItems:'center'
 	  },
 	  error:{
 			marginTop:30,
 			fontSize:13,
-			color:'#cc046f',
-
+			color:'#cc046f'
 	  },
 	  clearBtn:{
 			position:'absolute',

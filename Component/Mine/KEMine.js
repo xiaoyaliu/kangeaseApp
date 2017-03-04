@@ -21,7 +21,8 @@ import CommonCell from './../Common/ComponentCell';
 import StaffManage from './staffManage/staffList';
 import StaffLevel from './staffLevel/staffLevelList'
 import Personal from './personalData/myData'
-import ChangePwd from './chanfePwd'
+import ChangePwd from './changePwd'
+import Login from './../Login/login'
 class KEMine extends Component{
 	  constructor(props) {
 			super(props);
@@ -65,6 +66,11 @@ class KEMine extends Component{
 						  <View style={{marginTop:10}}>
 								<CommonCell title="关于康亿"/>
 						  </View>
+							<View style={{marginTop:30,paddingBottom:30,alignItems:"center"}}>
+								  <TouchableOpacity style={{width:120,height:40,alignItems:"center",justifyContent:"center"}} onPress={()=>Util.quit(this.props.navigator,Login)}>
+										<Text style={{fontSize:11,color:"#f20583"}}>退出当前登录和版本号</Text>
+								  </TouchableOpacity>
+							</View>
 				      </ScrollView>
 					</View>
 			);

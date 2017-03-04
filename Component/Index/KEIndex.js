@@ -14,8 +14,7 @@ import {
 		ListView,
 		ScrollView,
 		ActivityIndicator,
-		Platform,
-		Alert
+		Platform
 		} from 'react-native';
 import Util from './../Common/util';
 var dataTest=require('./../data/index.json');
@@ -24,9 +23,7 @@ var GoodsDetail=require('./../Goods/KEGoods');
 class KEIndex extends Component {
 	  constructor(props) {
 			super(props);
-			var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 			this.state = {
-				  dataSource: ds.cloneWithRows([]),
 				  isShow: false
 			};
 	  }
@@ -62,37 +59,40 @@ class KEIndex extends Component {
 			this._fetchData();
 	  }
     /*首页商品列表数据*/
-	  _fetchData(callback){
-			let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-				 this.setState({
-					   dataSource:ds.cloneWithRows(dataTest.data),
-					   isShow:true
-				 })
+	  _fetchData(){
+			var self = this;
+			let formData = new FormData();
+			formData.append("act", "getIndexInfo");
+			Util.get(formData, function (data) {
+
+				  if (data.flag&&data.adArr.length > 0) {
+						let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+						self.setState({
+							  dataSource:ds.cloneWithRows(data.adArr),
+							  isShow:true
+						})
+				  }else{
+						if(data.flag.msg!=""){
+						Util.toast(data.flag.msg)
+						}
+				  }
+
+			}, function (err) {
+			})
 	  }
 
 	  renderRow(rowdata){
 			return(
-					<TouchableOpacity  style={styles.cellStyle}  onPress={()=>this._jumpFocus(GoodsDetail,"商品详情页")}>
-						  <Image source={{uri: rowdata.image}} style={{width:Util.size.width, height:Util.size.width*0.418}}/>
+					<TouchableOpacity  style={styles.cellStyle}  onPress={()=>Util._jumpFocus(this.props.navigator,GoodsDetail,rowdata.ad_name,{id:rowdata.ad_link})}>
+						  <Image source={{uri: rowdata.imgPaht}} style={{width:Util.size.width, height:Util.size.width*0.418}}/>
 					</TouchableOpacity>
 			);
-	  }
-  //跳转到商品详情
-	  _jumpFocus(component, title){
-
-			const navigator = this.props.navigator;
-			if (navigator){
-				  navigator.push({
-						component: component,
-						title: title
-				  });
-			}
 	  }
 }
 const styles = StyleSheet.create({
 	  container: {
 			flex: 1,
-			backgroundColor: '#ffffff',
+			backgroundColor: '#ffffff'
 	  },
 	  header:{
 			flexDirection:'row',
@@ -129,7 +129,9 @@ const styles = StyleSheet.create({
 			paddingBottom:0
 	  },
 	  cellStyle:{
-			marginTop:12
+			marginTop:12,
+			width:Util.size.width,
+			height:Util.size.width*0.418
 	  }
 
 });

@@ -15,11 +15,11 @@ import {
 		} from 'react-native';
 import Util from './../Common/util';
 import ItemTitle from './../Common/itemTitle';
-var dataTest=require('./../data/searchList.json');
 class Goods extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
+				  data:this.props.data,
 				  isShow: false
 			}
 	  }
@@ -29,7 +29,7 @@ class Goods extends Component {
 					<View style={styles.container}>
 						  <View style={{height:10,backgroundColor:"#f1f1f1"}}></View>
 						  <View>
-								<ItemTitle title="商品评价"/>
+								<ItemTitle title={"商品评价（"+this.props.num+"）"}/>
 								{this.state.isShow&&<ListView dataSource={this.state.dataSource}
 										renderRow={(rowdata)=>this.renderRow(rowdata)}/>}
 						  </View>
@@ -42,9 +42,10 @@ class Goods extends Component {
 	  }
 	  /*首页商品列表数据*/
 	  _fetchData(callback){
+			console.log(this.props.data)
 			let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 			this.setState({
-				  dataSource:ds.cloneWithRows(dataTest.info),
+				  dataSource:ds.cloneWithRows(this.props.data),
 				  isShow:true
 			})
 	  }
@@ -54,16 +55,12 @@ class Goods extends Component {
 					<View style={{marginLeft:10,paddingTop:10,paddingBottom:10,paddingRight:10,borderBottomWidth:1,borderBottomColor:"#b3b3b3"}}>
 						  <View style={styles.evaluatePart}>
 								<View style={{flexDirection:'row',width:100}}>
-									  <Image source={{uri:"star_check"}} style={styles.star}/>
-									  <Image source={{uri:"star_check"}} style={styles.star}/>
-									  <Image source={{uri:"star_check"}} style={styles.star}/>
-									  <Image source={{uri:"star_check"}} style={styles.star}/>
-									  <Image source={{uri:"star_check"}} style={styles.star}/>
+									  {this.renderStar(rowdata.comment_rank)}
 								</View>
-								<Text style={styles.text4}>心***兰</Text>
+								<Text style={styles.text4}>{Util.encryptStr(rowdata.user_name)}</Text>
 						  </View>
-						  <Text style={styles.text5}>用着不错，挺管用的，是正品，比专柜卖的便宜很多,用完还要再来买。用着不错，挺管用的，是正品，比专柜卖的便宜很多，用完还要再来买。</Text>
-                          <Text style={styles.text4}>2017.01.21</Text>
+						  <Text style={styles.text5}>{rowdata.content}</Text>
+                          <Text style={styles.text4}>{rowdata.add_time}</Text>
 						  <View style={{flexDirection:'row'}}>
 						        <Image source={{uri:"http://www.kangease.com/images/goods/20160614/f8787da6f335272ef5e12d613adcb1ae175749wkqtdj.jpg"}} style={styles.evaImg}/>
 								<Image source={{uri:"http://www.kangease.com/images/goods/20160614/f8787da6f335272ef5e12d613adcb1ae175749wkqtdj.jpg"}} style={styles.evaImg}/>
@@ -71,6 +68,17 @@ class Goods extends Component {
 						  </View>
 					</View>
 			);
+	  }
+	  renderStar(starNum){
+			var arr=[];
+			for(let i=0;i<5;i++){
+				  if(starNum>i){
+						arr.push( <Image source={{uri:"star_check"}} style={styles.star} key={i}/>)
+				  }else{
+						arr.push( <Image source={{uri:"star"}} style={styles.star} key={i}/>)
+				  }
+			}
+			return arr;
 	  }
 
 }

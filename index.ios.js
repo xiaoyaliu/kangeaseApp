@@ -10,12 +10,26 @@ import {
         StyleSheet,
         Text,
         View,
+        AsyncStorage,
         Navigator
         } from 'react-native';
 
 import LaunchPage from './Component/Main/KELauchpage'
 //var Main=require('./Component/Main/XMGMain')
+import Storage from 'react-native-storage';
+/*var storage = new Storage({
+      size: 1000,
+      defaultExpires: null,
+      enableCache: true,
+})
+global.storage = storage;*/
 class XMGStart extends Component{
+      constructor(props){
+            super(props)
+            this.state={
+                  isLogin:false
+            }
+      }
   render(){
     return(
             <Navigator

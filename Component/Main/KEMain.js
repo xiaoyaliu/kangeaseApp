@@ -8,7 +8,7 @@ import {
 		Navigator
 		} from 'react-native';
 
-var KEHome=require('./KEHome');//搜索页
+var KEHome=require('./KEHome');
  class KEMain extends Component {
 	  constructor(props){
 			super(props);
@@ -27,7 +27,5 @@ var KEHome=require('./KEHome');//搜索页
 							/>
 			)
 	  }
-
-
 }
 module.exports=KEMain

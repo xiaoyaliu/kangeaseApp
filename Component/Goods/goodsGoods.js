@@ -21,7 +21,7 @@ class Goods extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
-				  isShow: false
+				  data:this.props.data
 			}
 	  }
 	  onStartShouldSetResponder(){
@@ -29,37 +29,35 @@ class Goods extends Component {
 			return true
 	  }
 	  render() {
+			let data=this.state.data;
 			return (
 					<View style={styles.container} ref="aaa">
-						  <LunBoCom img={img} changeEnabled={(value)=>this.props.changeEnabled(value)}/>
+						  <LunBoCom img={data.picArr} changeEnabled={(value)=>this.props.changeEnabled(value)}/>
 						  {/*基本信息*/}
 						  <View onStartShouldSetResponder={()=>this.onStartShouldSetResponder()}>
 						  <View style={[styles.message,{padding:10}]}>
-								<Text style={styles.text3}>骨源液 膳食营养补充剂</Text>
-								<Text style={styles.text2}>¥2980.00</Text>
-								<Text style={styles.text1}>通用名：骨源液</Text>
-								<Text style={styles.text1}>生产企业：</Text>
-								<Text style={styles.text1}>产品规格：6小盒*15小袋/小盒</Text>
+								<Text style={styles.text3}>{data.goods_name}</Text>
+								<Text style={styles.text2}>¥{data.market_price}</Text>
+								<Text style={styles.text1}>通用名：{data.goods_alias}</Text>
+								<Text style={styles.text1}>生产企业：{data.business}</Text>
+								<Text style={styles.text1}>产品规格：{data.norms}</Text>
 						  </View>
 						  {/*商品评价*/}
                            <View style={[styles.message,{paddingBottom:18}]}>
 								 <ItemTitle title={"商品评价（"+this.props.num+"）"}/>
+								 {this.props.goodsFirstComment!=""&&
                                  <View style={{padding:10}}>
 								     <View style={styles.evaluatePart}>
 									     <View style={{flexDirection:'row',width:100}}>
-										       <Image source={{uri:"star_check"}} style={styles.star}/>
-											   <Image source={{uri:"star_check"}} style={styles.star}/>
-											   <Image source={{uri:"star_check"}} style={styles.star}/>
-											   <Image source={{uri:"star_check"}} style={styles.star}/>
-											   <Image source={{uri:"star_check"}} style={styles.star}/>
+											   {this.renderStar()}
 										 </View>
-										   <Text style={styles.text4}>心***兰</Text>
+										   <Text style={styles.text4}>{Util.encryptStr(this.props.goodsFirstComment.user_name)}</Text>
 									 </View>
-									   <Text style={[styles.text5,{marginTop:4}]}>用着不错，挺管用的，是正品，比专柜卖的便宜很多,用完还要再来买。用着不错，挺管用的，是正品，比专柜卖的便宜很多，用完还要再来买。</Text>
+									   <Text style={[styles.text5,{marginTop:4}]}>{this.props.goodsFirstComment.content}</Text>
 
-								 </View>
+								 </View>}
 								 <TouchableOpacity style={styles.goEvaluate} onPress={()=>this.props.goEvaluate()}>
-									   <Text style={{fontSize:11,color:"#999",}}>查看全部评价</Text>
+									   <Text style={{fontSize:11,color:"#999"}}>查看全部评价</Text>
 								 </TouchableOpacity>
 						   </View>
 						 <View style={styles.bottomView}>
@@ -70,10 +68,22 @@ class Goods extends Component {
 			);
 
 	  }
+	  renderStar(){
+			var star=this.props.goodsFirstComment.comment_rank;
+			var arr=[];
+			for(let i=0;i<5;i++){
+				  if(star>i){
+						arr.push( <Image source={{uri:"star_check"}} style={styles.star} key={i}/>)
+				  }else{
+						arr.push( <Image source={{uri:"star"}} style={styles.star} key={i}/>)
+				  }
+			}
+			return arr;
+	  }
 }
 const styles = StyleSheet.create({
 	  container: {
-			backgroundColor:"#f1f1f1",
+			backgroundColor:"#f1f1f1"
 	  },
 	  message:{
 			backgroundColor:"#fff",

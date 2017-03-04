@@ -13,9 +13,10 @@ import Dimensions from 'Dimensions';
 import React, { Component } from 'react';
 import {
 		PixelRatio,
+		AsyncStorage
 		} from 'react-native';
 
-
+import Toast from 'react-native-root-toast';
 module.exports = {
 	  /*最小线宽*/
 	  pixel: 1 / PixelRatio.get(),
@@ -31,9 +32,13 @@ module.exports = {
 	   * @param {string} url
 	   * @param {function} callback 请求成功回调
 	   */
-	  get: function(url, successCallback, failCallback){
-			fetch(url)
-					.then((response) => response.text())
+	  get: function(formData, successCallback, failCallback){
+			let Url="http://192.168.1.176/appClientApi/controlApi.php";
+			fetch(Url,
+					{method: 'POST',
+						  headers: {},
+						  body: formData}
+			).then((response) => response.text())
 
 			.then((responseText) => {
 				  successCallback(JSON.parse(responseText));
@@ -41,7 +46,7 @@ module.exports = {
             .catch(function(err){
 	               failCallback(err);
             });
-},
+            },
 	  //跳转到component
 	  _jumpFocus(navigator,component, title,pramas){
 			if (navigator){
@@ -62,9 +67,71 @@ module.exports = {
 			intB:function(value){
 				  let s =/^[0-9]*[1-9][0-9]*$/;
 				  return s.test(value)?true:false
+			},
+			//用户名3-16位汉字字母英文
+			Username:function(value){
+				  let s=/^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+				  return s.test(value)?true:false
 			}
 
+	  },
+	  setStorage:function(name,value){
+			AsyncStorage.setItem(name,value);
+			console.log(name,value)
+	  },
+	  getStorage:function(key){
+			AsyncStorage.getItem(key,(error,res)=>{
+				  return res
+			})
+	  },
+	  removeStorage:function(key){
+			AsyncStorage.removeItem(key,(error,res)=>{
+				  if(!error){
+
+				  }
+			})
+	  },
+	  quit:function(navigator,component){
+			AsyncStorage.removeItem("username",(error,res)=>{
+				  if(!error){
+						this._jumpFocus(navigator,component)
+				  }else{
+
+				  }
+			})
+	  },
+	  toast:function(mag){
+			Toast.show(mag, {
+				  duration: Toast.durations.SHORT,
+				  position: Toast.positions.CENTER,
+				  shadow: true,
+				  animation: false,
+				  hideOnPress: true,
+				  delay: 0,
+				  onShow: () => {
+
+				  },
+				  onShown: () => {
+
+				  },
+				  onHide: () => {
+
+				  },
+				  onHidden: () => {
+
+				  }
+			})
+	  },
+	  //加密英文
+	  encryptStr:function(name){
+			let first=name.substring(0,1);
+			let last1=name.substring(name.length-1,name.length);
+			if(name.length<3){
+				  name=first+"***";
+			}else{
+				  name=first+"***"+last1;
+			}
+			return name;
 	  }
-/*loading效果*/
 
 };
