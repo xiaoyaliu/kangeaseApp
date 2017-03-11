@@ -53,8 +53,8 @@ var Reg = React.createClass({
 			return (
 					<View style={styles.container} onStartShouldSetResponder={()=>this.checkReg()}>
 						  <Nav title="注册" navigator={this.props.navigator}/>
-						  <ScrollView keyboardShouldPersistTaps ="always">
-						  <View style={styles.main}>
+						  <ScrollView keyboardShouldPersistTaps ="always" style={styles.main}>
+
 								<View style={styles.ViewItem}>
 									  <Text style={styles.styleLeft}>用户名</Text>
 									  <TextInput style={styles.styleRight} underlineColorAndroid='transparent'
@@ -83,13 +83,14 @@ var Reg = React.createClass({
 								</View>
 								<View style={styles.ViewItem}>
 									  <Text style={styles.styleLeft}>手机号</Text>
-									  <TextInput onBlur ={()=>this.checkMobile()}  style={styles.styleRight} underlineColorAndroid='transparent'
+									  <TextInput keyboardType="numeric" onBlur ={()=>this.checkMobile()}  style={styles.styleRight} underlineColorAndroid='transparent'
 												 onChangeText={(value)=>this.setState({mobileValue:value,mobile:false})}
 												 value={this.state.mobileValue}/>
 								</View>
 								<View style={styles.ViewItem}>
 									  <Text style={styles.styleLeft}>验证码</Text>
 									  <TextInput style={styles.styleRight} maxLength={6}
+												 keyboardType="numeric"
 												 underlineColorAndroid='transparent'
 												 onChangeText={(value)=>this.checkCode(value)}
 												 value={this.state.codeValue}/>
@@ -142,7 +143,7 @@ var Reg = React.createClass({
 									   </TouchableOpacity>*/}
 									  <Text style={{color:"#3d3d3d",fontSize:10}}>》</Text>
 								</View>
-						  </View>
+
 
 						  <TouchableOpacity
 								  style={[{backgroundColor:this.state.reg?"#f20583":"#cc046f"},styles.loginBtn]}
@@ -433,7 +434,8 @@ const styles = StyleSheet.create({
 	  },
 	  main:{
 			backgroundColor:"#fff",
-			marginTop:12
+			marginTop:12,
+		  paddingBottom:20
 	  },
 	  ViewItem:{
 			height:Platform.OS==='ios'?50:44,
@@ -458,11 +460,12 @@ const styles = StyleSheet.create({
             paddingLeft:10,
 		    width:76,
 			fontSize:13,
-			color:"#333",
-
+			color:"#333"
 	  },
 	  styleRight:{
-			width:Util.size.width-86
+			width:Util.size.width-86,
+		    fontSize:13,
+	        color:"#333"
 	  },
 	  getCode:{
 			position:"absolute",

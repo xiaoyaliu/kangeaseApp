@@ -11,14 +11,13 @@ import {
         Text,
         View,
         Navigator,
-        AsyncStorage,
         AppState,
         Alert
         } from 'react-native';
 
 import LaunchPage from './Component/Main/KELauchpage'
-//import LaunchPage from './Component/Shop/payOrder'
-//import KEMain from './Component/Shop/payOrder'
+//import LaunchPage from './Component/Common/addressLink'
+//import KEMain from './Component/Common/addressLink'
 import KEMain from './Component/Main/KEMain'
 import Util from './Component/Common/util'
 class XMGStart extends Component{
@@ -69,10 +68,10 @@ class XMGStart extends Component{
       }
       checkLogin(){
             var self=this;
-            AsyncStorage.getItem("username",(error,res)=>{
-                  if(res){
-                        this.setState({username:res})
-                        AsyncStorage.getItem("time",(error,res)=>{
+            Util.getStorage("username").then((res)=>{
+                  if(res) {
+                        this.setState({username: res});
+                        Util.getStorage("time").then((data)=>{
                               let currentTime=new Date().valueOf();
                               let time=new Date(res).valueOf();
                               var days=Math.ceil((currentTime-time)/(1000*60*60*24));
@@ -88,7 +87,6 @@ class XMGStart extends Component{
                                           isShow:true
                                     })
                               }
-
                         })
                   }else{
                         self.setState({

@@ -42,12 +42,13 @@ class Goods extends Component {
 	  }
 	  /*首页商品列表数据*/
 	  _fetchData(callback){
-			console.log(this.props.data)
-			let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-			this.setState({
-				  dataSource:ds.cloneWithRows(this.props.data),
-				  isShow:true
-			})
+			if(this.props.data.length>0){
+				let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+				this.setState({
+					  dataSource:ds.cloneWithRows(this.props.data),
+					  isShow:true
+				})
+			}
 	  }
 
 	  renderRow(rowdata){

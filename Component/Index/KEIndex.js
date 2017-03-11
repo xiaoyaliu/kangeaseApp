@@ -19,12 +19,13 @@ import {
 import Util from './../Common/util';
 var dataTest=require('./../data/index.json');
 var SearchComponent=require('./../Search/KESearch');
-var GoodsDetail=require('./../Goods/KEGoods');
+import GoodsDetail from './../Goods/KEGoods';
 class KEIndex extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
-				  isShow: false
+				  isShow: false,
+				  cartNum:0
 			};
 	  }
 	  render() {
@@ -35,7 +36,7 @@ class KEIndex extends Component {
 						      <Image source={{uri:"logo_index"}} style={styles.leftLogo}/>
 							  <View style={styles.rightSearch}>
 									<Image source={{uri:"search_icon"}} style={styles.searchLogo}/>
-									<TextInput style={styles.searchInput} ref="searchInput" onFocus={()=>{this.refs.searchInput.blur();this._jumpFocus(SearchComponent,"搜索页")}} placeholder ="请输入您要搜索的商品" placeholderTextColor="#b2b2b2" underlineColorAndroid ="transparent"/>
+									<TextInput style={styles.searchInput} ref="searchInput" onFocus={()=>{this.refs.searchInput.blur();Util._jumpFocus(this.props.navigator,SearchComponent,"搜索页")}} placeholder ="请输入您要搜索的商品" placeholderTextColor="#b2b2b2" underlineColorAndroid ="transparent"/>
 							  </View>
 						</View>
 						  {/*首页商品列表*/}
@@ -83,7 +84,7 @@ class KEIndex extends Component {
 
 	  renderRow(rowdata){
 			return(
-					<TouchableOpacity  style={styles.cellStyle}  onPress={()=>Util._jumpFocus(this.props.navigator,GoodsDetail,rowdata.ad_name,{id:rowdata.ad_link})}>
+					<TouchableOpacity  style={styles.cellStyle}  onPress={()=>Util._jumpFocus(this.props.navigator,GoodsDetail,rowdata.ad_name,{id:rowdata.ad_link,badge:(value)=>{this.props.badge(value)}})}>
 						  <Image source={{uri: rowdata.imgPaht}} style={{width:Util.size.width, height:Util.size.width*0.418}}/>
 					</TouchableOpacity>
 			);

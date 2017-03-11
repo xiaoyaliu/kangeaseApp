@@ -18,16 +18,18 @@ import {
 import Util from './../Common/util';
 import Nav from './../Common/navComponent';
 import DeleteView from './../Common/deleteLevel';
-import newAddress from './../Address/newAddress.js';
-var dataTest=require('./../data/address.json');
+import InsetAddress from './../Address/newAddress';
+import EditAddress from './../Address/editAddress';
 class ManageAddress extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
 				  isShow: false,
+				  isShowNull:false,
 				  modalVisible:false,
 				  deleteId:0,
-				  defaultId:3
+				  defaultId:0,
+				  item:0
 			}
 	  }
 
@@ -42,8 +44,15 @@ class ManageAddress extends Component {
 						  <ScrollView style={{marginBottom:Platform.OS=='ios'?50:44}}>
 								{this.renderRow()}
 						  </ScrollView>}
-						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>{Util._jumpFocus(this.props.navigator,newAddress,"新增收货地址")}}>
-								<Text style={{color:"#ffffff",fontSize:15,}}>新增收货地址</Text>
+								{this.state.isShowNull&&
+										<View style={{flex:1,alignItems:'center'}}>
+										     <Image source={{uri:"address_null"}} style={{width:82,height:82,marginTop:Util.size.width*0.18}} resizeMode='stretch'/>
+											  <Text style={{color:"#999",fontSize:13,marginTop:12}}>您暂时还没有收货地址</Text>
+										</View>
+								}
+
+						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>Util._jumpFocus(this.props.navigator,InsetAddress,"添加收货地址",{updateAddress:()=>this.updateAddress()})}>
+								<Text style={{color:"#ffffff",fontSize:15}}>新增收货地址</Text>
 						  </TouchableOpacity>
                            </View>
 
@@ -55,37 +64,99 @@ class ManageAddress extends Component {
 			this._fetchData();
 	  }
 	  /*首页商品列表数据*/
-	  _fetchData(callback){
-			this.setState({
-				  isShow:true
-			})
+	  _fetchData(){
+			let self=this;
+			let dataAddress;
+			let formData = new FormData();
+			formData.append("act","showAddressInfo");
+			Util.get(formData,function(data){
+				  console.log(data)
+				  if(data.flag){
+						if(data.data.length>0){
+							  dataAddress = data.data;
+							  for (let i = 0; i < dataAddress.length; i++) {
+									if (dataAddress[i].is_default === "1") {
+										  self.setState({
+												defaultId: dataAddress[i].address_id
+										  })
+									}
+							  }
+							  self.setState({
+									dataSource: dataAddress,
+									isShow: true
+							  })
+						}else{
+							  self.setState({
+									isShowNull: true
+							  })
+						}
+						self.props.updateAddress(data.data)
+				  }
+			},function(){})
+
+	  }
+	  updateAddress(){
+			this._fetchData();
 
 	  }
 	  //删除地址
 	  deleteAddress(){
-			Alert.alert(this.state.deleteId+"");
-			this.setState({modalVisible:false});
+			let self=this;
+			let formData = new FormData();
+			let id=this.state.deleteId;
+			formData.append("act","delAddressInfo");
+			formData.append("param1",id+"");
+			Util.get(formData,function(data){
+				  if(data.flag>0){
+						let d=self.state.dataSource;
+						let item=self.state.item;
+						d.splice(item,1);
+						if(d.length>0){
+							  self.setState({
+									dataSource:d,
+									modalVisible:false
+							  });
+						}else{
+							  self.setState({
+									isShow:false,
+									modalVisible:false,
+									isShowNull:true
+							  });
+						}
+						self.props.updateAddress(d)
+				  }
+			},function(){})
 	  }
 	  //设置默认地址
 	  setDefaultAddress(id){
-
-			this.setState({
-				  defaultId:id
-			})
+			let self=this;
+			let formData = new FormData();
+			formData.append("act","setDefaultAddress");
+			formData.append("param1",id+"");
+			Util.get(formData,function(data){
+				  console.log(data)
+				  if(data.flag>0){
+						self.setState({
+							  defaultId:id,
+							  isShow:true
+						})
+				  }
+			},function(){})
 	  }
 	  renderRow(){
 			var arr=[];
-			var data=dataTest.data
-			for(var i=0;i<data.length;i++){
-				  let id=data[i].id;
+			var data=this.state.dataSource;
+			for(let i=0;i<data.length;i++){
+				  let id=data[i].address_id;
+
 				  arr.push(
 						  <View  style={styles.cellStyle} key={i}>
 								<View style={styles.addressMessage}>
 									  <View style={styles.addressInfo}>
-											<Text style={styles.text1}>{data[i].name}</Text>
+											<Text style={styles.text1}>{data[i].consignee}</Text>
 											<Text style={styles.text1}>{data[i].mobile}</Text>
 									  </View>
-									  <Text style={styles.text2}>{data[i].detail}</Text>
+									  <Text style={styles.text2}>{data[i].provinceName+" "+data[i].cityName+" "+data[i].districtName+" "+data[i].address}</Text>
 								</View>
 								<View style={styles.checkItem}>
 									  <TouchableOpacity style={{flexDirection:'row',alignItems:'center',height:40}} onPress={()=>this.setDefaultAddress(id)}>
@@ -94,10 +165,10 @@ class ManageAddress extends Component {
 											<Text style={styles.text3}>设为默认地址</Text>
 									  </TouchableOpacity>
 									  <View style={styles.ope}>
-											<TouchableOpacity style={styles.btn}>
+											<TouchableOpacity style={styles.btn} onPress={()=>Util._jumpFocus(this.props.navigator,EditAddress,"编辑收货地址",{id:id,updateAddress:()=>this.updateAddress()})}>
 												  <Text style={styles.text3}>编辑</Text>
 											</TouchableOpacity>
-											<TouchableOpacity style={styles.btn} onPress={()=>this.setState({modalVisible:true,deleteId:id})}>
+											<TouchableOpacity style={styles.btn} onPress={()=>this.setState({modalVisible:true,deleteId:id,item:i})}>
 												  <Text style={styles.text3}>删除</Text>
 											</TouchableOpacity>
 									  </View>
@@ -107,11 +178,6 @@ class ManageAddress extends Component {
 			}
 			return arr
 
-	  }
-	  //跳转回
-	  _jumpBack(id){
-			this.props.setAddressId(id);
-			this.props.navigator.pop()
 	  }
 
 

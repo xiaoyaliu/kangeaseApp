@@ -6,44 +6,97 @@
 
 import React, { Component } from 'react';
 import {
-        AppRegistry,
-        StyleSheet,
-        Text,
-        View,
-        AsyncStorage,
-        Navigator
-        } from 'react-native';
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    Navigator,
+    AsyncStorage,
+    AppState,
+    Alert
+} from 'react-native';
 
 import LaunchPage from './Component/Main/KELauchpage'
-//var Main=require('./Component/Main/XMGMain')
-import Storage from 'react-native-storage';
-/*var storage = new Storage({
-      size: 1000,
-      defaultExpires: null,
-      enableCache: true,
-})
-global.storage = storage;*/
+//import LaunchPage from './Component/Shop/payOrder'
+//import KEMain from './Component/Shop/payOrder'
+import KEMain from './Component/Main/KEMain'
+import Util from './Component/Common/util'
 class XMGStart extends Component{
-      constructor(props){
-            super(props)
-            this.state={
-                  isLogin:false
-            }
-      }
-  render(){
-    return(
-            <Navigator
-                    initialRoute={{name: "启动页", component: LaunchPage}}
-                    configureScene={()=>{return Navigator.SceneConfigs.VerticalUpSwipeJump}}
-                    renderScene={(route, navigator) =>{
-                               let Component=route.component;
-                               return <Component {...route.passProps} navigator={navigator}/>
-                            }
-                           }
-                    />
+    constructor(props){
+        super(props)
+        this.state={
+            currentAppState: AppState.currentState,
+            isLogin:false,
+            isShow:false,
+            username:""
+        }
+    }
+    render(){
+        return(
+            <View style={{flex:1}}>
+        {this.state.isShow&&
+        <Navigator
+            initialRoute={{name: "启动页", component: this.state.isLogin?KEMain:LaunchPage}}
+            //configureScene={()=>{return Navigator.SceneConfigs.VerticalUpSwipeJump}}
+            renderScene={(route, navigator) =>{
+            let Component=route.component;
+            return <Component {...route.passProps} navigator={navigator}/>
+        }
+        }
+        />}
+    </View>
     )
-  }
+    }
+    componentDidMount(){
+        this.checkLogin();
+        AppState.addEventListener('change', this._handleAppStateChange);
+    }
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+    _handleAppStateChange = (nextAppState) => {
+    //进入app
+    if (this.state.currentAppState.match(/inactive|background/) && nextAppState === 'active') {
+    this.checkLogin();
+}else{
+    //离开App，如果已登录记录离开时间，判断是否过期
+    if(this.state.username!=""&&this.state.username!=null){
+        let time=new Date();
+        Util.setStorage("time",time)
+    }
+}
+this.setState({currentAppState: nextAppState});
+}
+checkLogin(){
+    var self=this;
+    AsyncStorage.getItem("username",(error,res)=>{
+        if(res){
+            this.setState({username:res})
+            AsyncStorage.getItem("time",(error,res)=>{
+                let currentTime=new Date().valueOf();
+            let time=new Date(res).valueOf();
+            var days=Math.ceil((currentTime-time)/(1000*60*60*24));
+            if(days>3){
+                Util.removeStorage("username");
+                self.setState({
+                    isShow:true,
+                    username:""
+                })
+            }else{
+                self.setState({
+                    isLogin:true,
+                    isShow:true
+                })
+            }
 
+        })
+        }else{
+            self.setState({
+            isShow:true
+        })
+    }
+})
+}
 }
 
 AppRegistry.registerComponent('Test', () => XMGStart);

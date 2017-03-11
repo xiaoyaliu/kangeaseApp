@@ -17,12 +17,13 @@ import {
 		} from 'react-native';
 import Util from './../Common/util';
 import manageAddress from './../Address/manageAddress';
-var dataTest=require('./../data/address.json');
+import InsetAddress from './newAddress';
 class ChooseAddress extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
-				  isShow: false
+				  isShow: false,
+				  isShowNull:false
 			}
 	  }
 
@@ -31,11 +32,11 @@ class ChooseAddress extends Component {
 					<View style={styles.container}>
 						  {/*头部导航*/}
 						  <View style={styles.nav}>
-								<TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.leftViewStyle}>
+								<TouchableOpacity onPress={()=>{this.props.checkAddress();this.props.navigator.pop()}} style={styles.leftViewStyle}>
 									  <Image source={{uri:'back_icon'}} style={styles.backImg}/>
 								</TouchableOpacity>
 								<Text style={{color:"#333333",fontSize:16,}}>选择收货地址</Text>
-								<TouchableOpacity style={styles.rightViewStyle} onPress={()=>this._jumpFocus(manageAddress,"管理收货地址")}>
+								<TouchableOpacity style={styles.rightViewStyle} onPress={()=>Util._jumpFocus(this.props.navigator,manageAddress,"管理收货地址",{updateAddress:(value)=>{this.updateAddress(value)}})}>
 									  <Text style={{color:"#333333",fontSize:14,textAlign:'right' }}>管理</Text>
 								</TouchableOpacity>
 						  </View>
@@ -46,10 +47,15 @@ class ChooseAddress extends Component {
 										  style={{overflow:'hidden',paddingBottom:Platform.OS=='ios'?50:44}}
 										/>
 						  </ScrollView>}
-						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>{this.update()}}>
-								<Text style={{color:"#ffffff",fontSize:15,}}>新增收货地址</Text>
+						  {this.state.isShowNull&&
+						  <View style={{flex:1,alignItems:'center'}}>
+								<Image source={{uri:"address_null"}} style={{width:82,height:82,marginTop:Util.size.width*0.18}} resizeMode='stretch'/>
+								<Text style={{color:"#999",fontSize:13,marginTop:12}}>您暂时还没有收货地址</Text>
+						  </View>
+						  }
+						  <TouchableOpacity style={[{backgroundColor:"#f20583"},styles.loginBtn]} onPress={()=>Util._jumpFocus(this.props.navigator,InsetAddress,"添加收货地址",{updateAddress:()=>this.updateInsertAddress()})}>
+								<Text style={{color:"#ffffff",fontSize:15}}>新增收货地址</Text>
 						  </TouchableOpacity>
-
 					</View>
 			);
 
@@ -58,51 +64,78 @@ class ChooseAddress extends Component {
 			this._fetchData();
 	  }
 	  /*首页商品列表数据*/
-	  _fetchData(callback){
-			let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-			this.setState({
-				  dataSource:ds.cloneWithRows(dataTest.data),
-				  isShow:true
-			})
-
+	  _fetchData(){
+			let self=this;
+			let formData = new FormData();
+			formData.append("act","showAddressInfo");
+            Util.get(formData,function(data){
+				  console.log(data)
+                  if(data.flag){
+						if(data.data.length>0){
+						let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+						self.setState({
+							  dataSource:ds.cloneWithRows(data.data),
+							  isShow:true
+						})
+						}else{
+							  self.setState({
+									isShowNull:true
+							  })
+						}
+				  }
+		       },function(){})
+	  }
+	  updateInsertAddress(){
+			this._fetchData();
 	  }
 	  renderRow(rowdata){
 			return(
 					<View style={{borderBottomWidth:Util.pixel,borderBottomColor:'#dadada'}}>
-						  <TouchableOpacity  style={styles.cellStyle} onPress={()=>this._jumpBack(rowdata.id)}>
+						  <TouchableOpacity  style={styles.cellStyle} onPress={()=>this._jumpBack(rowdata)}>
 								<View style={styles.addressMessage}>
 									  <View style={styles.addressInfo}>
-											<Text style={styles.text1}>{rowdata.name}</Text>
+											<Text style={styles.text1}>{rowdata.consignee}</Text>
 											<Text style={styles.text1}>{rowdata.mobile}</Text>
 									  </View>
 									  <View>
 								           <Text style={styles.text2}>
-												 {rowdata.isDefault&&<Text style={{color:"#f20583"}}>[默认地址]</Text>}
-												 <Text>{rowdata.detail}</Text>
+												 {rowdata.is_default==="1"&&<Text style={{color:"#f20583"}}>[默认地址]</Text>}
+												 <Text>{rowdata.provinceName+" "+rowdata.cityName+" "+rowdata.districtName+" "+rowdata.address}</Text>
 										   </Text>
 									  </View>
 								</View>
-								{rowdata.id==this.props.id?<Image source={{uri:"checked_circle_icon"}} style={styles.circleIcon} resizeMode="contain"/>:
+								{rowdata.address_id==this.props.id?<Image source={{uri:"checked_circle_icon"}} style={styles.circleIcon} resizeMode="contain"/>:
 										<View style={styles.degStyle}></View>}
 						  </TouchableOpacity>
 					</View>
 			);
 	  }
+	  updateAddress(value){
+			if(value.length>0){
+				  let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+				  this.setState({
+						dataSource:ds.cloneWithRows(value)
+					   })
+				  if(!this.state.isShow){
+						this.setState({
+							  isShow:true
+						})
+				  }
+			  }else{
+				  this.setState({
+						isShow:false,
+						isShowNull:true
+				  })
+			}
+
+	  }
 	  //跳转回
 	  _jumpBack(id){
-			this.props.setAddressId(id);
+			this.props.setAddress(id);
 			this.props.navigator.pop()
 	  }
-	  //跳转到component
-	  _jumpFocus(component, title){
+	  InsertAddress(){
 
-			const navigator = this.props.navigator;
-			if (navigator){
-				  navigator.push({
-						component: component,
-						title: title
-				  });
-			}
 	  }
 
 }
@@ -116,7 +149,7 @@ const styles = StyleSheet.create({
 			borderBottomColor:'#d4d4d4',
 			backgroundColor:"#fff",
 			alignItems:'center',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?58:44,
 			paddingTop:Platform.OS==='ios'?15:0,
 			justifyContent:'center'
 	  },
@@ -125,7 +158,7 @@ const styles = StyleSheet.create({
 			height:Platform.OS==='ios'?28:24,
 			position:'absolute',
 			left:Platform.OS==='ios'?3:4,
-			bottom:Platform.OS==='ios'?18:10,
+			bottom:Platform.OS==='ios'?6:10,
 			alignItems:'center',
 			justifyContent:'center'
 
@@ -136,7 +169,7 @@ const styles = StyleSheet.create({
 	  },
 	  rightViewStyle:{
 			position:'absolute',
-			height:Platform.OS==='ios'?50:44,
+			height:Platform.OS==='ios'?43:44,
 			bottom:0,
 			width:34,
 			right:10,
@@ -164,7 +197,7 @@ const styles = StyleSheet.create({
 		},
 	  addressMessage:{
 			height:60,
-			alignItems:'center',
+		/*	alignItems:'center',*/
 			justifyContent:'center',
 			width:Util.size.width-60,
 	  },

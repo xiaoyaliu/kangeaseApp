@@ -18,18 +18,17 @@ import {
 		} from 'react-native';
 import Util from './../Common/util';
 import Nav from './../Common/navComponent';
-var AddressChooce=require('./../Address/chooseAddress');
-var dataAddress=require('./../data/address.json');
-var dataTest=require('./../data/searchList.json');
+import AddressChooce from './../Address/chooseAddress';
+import InsetAddress from './../Address/newAddress';
+
 class OrderSure extends Component {
 	  constructor(props) {
 			super(props);
 			this.state = {
 				  isShow: false,
-				  data:dataTest,
 				  messageTitle:true,
 				  messageValue:"",
-				  addressId:3
+				  addressId:0
 			}
 	  }
 
@@ -37,20 +36,22 @@ class OrderSure extends Component {
 			return (
 					<View style={styles.container}>
 						  {/*头部导航*/}
+						  {this.state.isShow&&
+						  <View style={{flex:1}}>
 						  <Nav title="确认订单" navigator={this.props.navigator}/>
-						  <ScrollView>
-								<View style={{marginBottom:Platform.OS==='ios'?64:58}}>
-								{/*收货地址*/}
+							<ScrollView>
+							<View style={{marginBottom:Platform.OS==='ios'?64:58}}>
+
 									  {this.renderAddress()}
-								{/*商品信息*/}
-                                <View style={styles.goodsList}>
+
+						        <View style={styles.goodsList}>
 									  {this.renderGoodsList()}
 									  <View style={styles.priceItem}>
-									      <Text style={[styles.text2,{lineHeight:32}]}>共3件商品&nbsp;&nbsp;小计：<Text style={{color:"#f20583",fontSize:15}}>¥129.00</Text></Text>
+									      <Text style={[styles.text2,{lineHeight:32}]}>共{this.state.data.totalGoodsNum}件商品&nbsp;&nbsp;小计：<Text style={{color:"#f20583",fontSize:15}}>¥{this.state.data.totalAmount}</Text></Text>
 											<Text style={styles.text2}>运费：<Text style={{color:"#f20583"}}>¥8.00</Text></Text>
 									  </View>
 								</View>
-								{/*实名认证*/}
+
 								<TouchableOpacity style={styles.certification}>
 									  <Text style={styles.text3}>实名认证</Text>
 									   <View style={styles.certificationRight}>
@@ -61,7 +62,7 @@ class OrderSure extends Component {
 											<Image source={{uri:"arrow_icon"}} tintColor="#b1b1b1" style={{width:6,height:11.25,marginRight:10,marginLeft:4}}/>
 									   </View>
 								</TouchableOpacity>
-								{/*商家留言*/}
+
 								<View style={styles.message}>
 									  {this.state.messageTitle&&<Text style={[styles.text3,{lineHeight:18,marginTop:9}]}>给商家留言：</Text>}
 									    <TextInput placeholder="选填" multiline={true} onFocus={()=>this.setState({messageTitle:false})} onChangeText={(text) => this.setState({messageValue:text})}
@@ -71,11 +72,12 @@ class OrderSure extends Component {
 						  </ScrollView>
 						  <View style={styles.bottomFix}>
 								<Text style={styles.text3}>实付金额：</Text>
-								<Text style={{color:"#f20583",fontSize:16}}>¥300.00</Text>
+							    <Text style={{color:"#f20583",fontSize:16}}>¥{this.state.data.totalAmount}</Text>
 								<TouchableOpacity style={styles.checkout} onPress={()=>this._jumpFocus(OrderSure, "确认订单")}>
 									  <Text style={styles.checkoutText}>结算</Text>
 								</TouchableOpacity>
 							</View>
+								</View>}
 					</View>
 			);
 
@@ -84,22 +86,48 @@ class OrderSure extends Component {
 			this._fetchData();
 	  }
 	  /*首页商品列表数据*/
-	  _fetchData(callback){
+	  _fetchData(){
+			let address;
+			let dataAddress=this.props.data.allAddress;
+			if(dataAddress.length>0){
+				  for(let i=0;i<dataAddress.length;i++){
+						if(dataAddress[i].is_default==="1"){
+							  address=dataAddress[i];
+						}
+				  }
+				  if(!address){
+						address=dataAddress[0];
+				  }
+				  this.setState({
+						data:this.props.data,
+						address:address,
+						addressId:address.address_id,
+						isShow:true
+				  })
+			}else{
+				  this.setState({
+						data:this.props.data,
+						address:"",
+						isShow:true
+				  })
+			}
 
 
 	  }
 	  renderGoodsList(){
+			let data=this.state.data;
 			var listArr=[];
-			for(var i=0;i<5;i++){
+			for(var i=0;i<data.cartGoods.goods_list.length;i++){
+				  let it=data.cartGoods.goods_list[i]
 				  listArr.push(
 						  <View key={i} style={{borderBottomWidth:1,borderBottomColor:'#cccccc'}}>
 								<View  style={styles.cellStyle}>
-									  <Image source={{uri: dataTest.info[i].goods_img}} style={{width:72, height:72}}/>
+									  <Image source={{uri: it.goods_img}} style={{width:72, height:72}}/>
 									  <View style={styles.goods_middle}>
-											<Text style={styles.goods_name} numberOfLines={2}>{ dataTest.info[i].goods_name}测试测试测试测试测试测试测试测试测试测试测试测试</Text>
-											<Text style={styles.goods_price}>¥{dataTest.info[i].shop_price}</Text>
+											<Text style={styles.goods_name} numberOfLines={2}>{it.goods_name}</Text>
+											<Text style={styles.goods_price}>¥{it.market_price}</Text>
 									  </View>
-									  <Text style={[styles.addressAddress,{marginTop:56,marginLeft:8}]}>X1</Text>
+									  <Text style={[styles.addressAddress,{marginTop:56,marginLeft:8}]}>X{it.goods_number}</Text>
 								</View>
 
 						  </View>
@@ -108,56 +136,114 @@ class OrderSure extends Component {
 			return listArr;
 	  }
  renderAddress(){
-	   var data;
-	   for(var i=0;i<dataAddress.data.length;i++){
-			 if(dataAddress.data[i].id==this.state.addressId){
-				   data=dataAddress.data[i]
-			 }
+	 let d=this.state.address;
+	   if(d!=""){
+			 return(
+			 <TouchableOpacity style={styles.address} onPress={()=>Util._jumpFocus(this.props.navigator,AddressChooce,"选择收货地址",{checkAddress:()=>{this.checkAddress()},setAddress:(value)=>this.setAddress(value)})}>
+					   <View style={styles.addressItem}>
+						 <Text style={styles.text1}>收货人：{d.consignee}</Text>
+						 <Text style={styles.text1}>{d.mobile}</Text>
+				   </View>
+				   <View style={styles.addressDetail}>
+						 <Image source={{uri:"address_icon"}} style={{width:13,height:17,marginLeft:10,marginRight:10,marginBottom:6}}/>
+						 <Text style={styles.addressAddress}>{d.provinceName} {d.cityName} {d.districtName} {d.address}</Text>
+						 <Image source={{uri:"arrow_icon"}} tintColor="#b1b1b1" style={{width:8,height:15,marginRight:10,marginLeft:22}}/>
+				   </View>
+				   {Platform.OS==='ios'?
+						   <Image source={{uri:"address_bottom"}} resizeMode="repeat" style={{width:Util.size.width,height:3}}/>:
+						   <View style={{flexDirection:'row',width:Util.size.width,overflow:'hidden'}}>
+								 {this.renderImage()}
+						   </View>
+				   }
+			 </TouchableOpacity>
+			 )
+	   }else{
+			 return(
+					 <TouchableOpacity style={styles.address} onPress={()=>Util._jumpFocus(this.props.navigator,InsetAddress,"添加收货地址",{comeFrom:"orderSure",updateAddress:()=>this.updateAddress()})}>
+						   <View style={[styles.addressDetail,{marginTop:8}]}>
+								 <Image	source={{uri:"add_icon"}} style={{marginLeft:10,width:Platform.OS==='ios'?22:20,height:Platform.OS==='ios'?22:20,marginRight:6}} resizeMode="stretch"/>
+								 <Text style={styles.text3}>添加收货地址</Text>
+						   </View>
+						   {Platform.OS==='ios'?
+								   <Image source={{uri:"address_bottom"}} resizeMode="repeat" style={{width:Util.size.width,height:3}}/>:
+								   <View style={{flexDirection:'row',width:Util.size.width,overflow:'hidden'}}>
+										 {this.renderImage()}
+								   </View>
+						   }
+					 </TouchableOpacity>
+			 )
 	   }
-	   return(
-	   <TouchableOpacity style={styles.address} onPress={()=>this._jumpFocus(AddressChooce,"选择收货地址",this.state.addressId)}>
-			 <View style={styles.addressItem}>
-				   <Text style={styles.text1}>收货人：{data.name}</Text>
-				   <Text style={styles.text1}>{data.mobile}</Text>
-			 </View>
-			 <View style={styles.addressDetail}>
-				   <Image source={{uri:"address_icon"}} style={{width:13,height:17,marginLeft:10,marginRight:10,marginBottom:6}}/>
-				   <Text style={styles.addressAddress}>{data.detail}</Text>
-				   <Image source={{uri:"arrow_icon"}} tintColor="#b1b1b1" style={{width:8,height:15,marginRight:10,marginLeft:22}}/>
-			 </View>
-			 {Platform.OS==='ios'?
-					 <Image source={{uri:"address_bottom"}} resizeMode="repeat" style={{width:Util.size.width,height:3}}/>:
-					 <View style={{flexDirection:'row',width:Util.size.width,overflow:'hidden'}}>
-						   {this.renderImage()}
-					 </View>
-			 }
-	   </TouchableOpacity>
-	   )
  }
-	  renderImage(){
-			var l=Math.ceil(Util.size.width/54);5
-			var imgArr=[];
-			for(var i=0;i<l;i++){
-				  imgArr.push(<Image key={i} source={{uri:"address_bottom"}}style={{width:54,height:3}}/>)
+	  renderImage() {
+			var l = Math.ceil(Util.size.width / 54);
+			var imgArr = [];
+			for (var i = 0; i < l; i++) {
+				  imgArr.push(<Image key={i} source={{uri:"address_bottom"}} style={{width:54,height:3}}/>)
 			}
 			return imgArr;
 	  }
-	  //跳转
-	  _jumpFocus(component, title,id){
-
-			const navigator = this.props.navigator;
-			if (navigator){
-				  navigator.push({
-						component: component,
-						title: title,
-						passProps:{
-							  id:id,
-							  setAddressId:(i)=>this.setState({addressId:i})
-						}
-				  });
-			}
+     //选择收货地址时更新选中的收货地址
+	  setAddress(value){
+			this.setState({addressId:value.address_id,address:value})
 	  }
+	  //返回收货地址时，判断上次选中的收货地址是否被删除了
+	  checkAddress(){
+			let self=this;
+			let dataAddress;
+			let address;
+			let formData = new FormData();
+			formData.append("act","showAddressInfo");
+			let addressId=self.state.addressId;
+			Util.get(formData,function(data){
+				  if(data.flag){
+						//判断是否还有地址信息
+						if(data.data.length>0){
+							  dataAddress = data.data;
+							  let isDelete=true;//假设被删
+							  for (let i = 0; i < dataAddress.length; i++) {
+									if(dataAddress[i].is_default==="1"){//记录默认地址，被删除时可以用
+										  address=dataAddress[i];
+									}
+									if (dataAddress[i].address_id ===addressId) {//如果有则没被删除
+										  isDelete=false;
+										  return;
+									}
 
+							  }
+							  if(isDelete){
+									if(!address){
+										address=dataAddress[0];
+									}
+									self.setState({//如果被删除需要更新收货地址
+										  address:address,
+										  addressId:address.address_id
+									})
+							  }
+						}else{
+							  self.setState({
+									address:""
+							  })
+						}
+				  }
+			},function(){})
+
+	  }
+	  //新建收货地址返回更新
+	  updateAddress(){
+			let self=this;
+			let formData = new FormData();
+			formData.append("act","showAddressInfo");
+			Util.get(formData,function(data){
+				  if(data.flag){
+						if(data.data.length>0){
+									self.setState({
+										  address:data.data[0],
+										  addressId:data.data[0].address_id
+									})
+							  }
+						}
+			},function(){})
+	  }
 }
 const styles = StyleSheet.create({
 	  container: {

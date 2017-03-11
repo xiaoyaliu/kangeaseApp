@@ -43,26 +43,26 @@ export default class LaunchImage extends Component{
 								{Platform.OS=='ios'?
 								<View>
 									  <View style={{marginTop:10}}>
-											<View>
-											 <TextInput clearButtonMode="while-editing" onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.setState({nameValue:value})} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8"/>
+											<View style={styles.viewBorder}>
+											 <TextInput clearButtonMode="while-editing" onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}    style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8"/>
 											</View>
 
 									  </View>
 									  <View style={{marginTop:10}}>
-											<View>
-											  <TextInput clearButtonMode="while-editing" returnKeyType="go" onSubmitEditing={()=>this.submitLogin()} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.setState({pwdValue:value})} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} />
+											<View style={styles.viewBorder}>
+											  <TextInput clearButtonMode="while-editing" returnKeyType="go" onSubmitEditing={()=>this.submitLogin()} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} />
 											</View>
 									  </View>
 								</View>:
 										<View>
 											  <View style={{marginTop:10}}>
-													<View>
+													<View style={styles.viewBorder}>
 														  <TextInput maxLength={16} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearNameState(value)} value={this.state.nameValue}  style={styles.TextInputStyle} placeholder="用户名" placeholderTextColor="#d8baf8" underlineColorAndroid='transparent'/>
 													</View>
 													{this.renderNameClear()}
 											  </View>
 											  <View style={{marginTop:10}}>
-													<View>
+													<View style={styles.viewBorder} >
 														  <TextInput maxLength={20} onBlur={()=>this.changeLoginState()} onChangeText ={(value)=>this.clearPwdState(value)} style={styles.TextInputStyle}  value={this.state.pwdValue} placeholder="密码" placeholderTextColor="#d8baf8" secureTextEntry={true} underlineColorAndroid='transparent' />
 													</View>
 													{this.renderPwdClear()}
@@ -208,7 +208,7 @@ export default class LaunchImage extends Component{
 						if(data.flag){
 							  Util.setStorage("username",data.info.user_name)
 							  Util.setStorage("userId",data.info.user_id)
-							  let time=new Date();
+							  let time=new Date()+"";
 							  Util.setStorage("time",time)
 							  self._jump(KEMain)
 						}else{
@@ -239,13 +239,15 @@ const styles = StyleSheet.create({
 			marginRight:20,
 			width:Util.size.width-40
 	  },
+	viewBorder:{
+		borderBottomWidth:1,
+		borderColor:"rgb(255,255,255)"
+	},
 	  TextInputStyle:{
 			color:"#ffffff",
 			height:Platform.OS==='ios'?38:32,
 			paddingTop:0,
 			paddingBottom:0,
-			borderBottomWidth:1,
-			borderColor:"rgb(255,255,255)",
 			fontSize:13
 	  },
 	  loginBtn:{

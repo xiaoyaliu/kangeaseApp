@@ -13,7 +13,9 @@ import {
 		Image,
 		ScrollView,
 		Animated,
+		Easing,
 		TouchableOpacity,
+		Alert
 		} from 'react-native';
 var screenWidth=Util.size.width;
 import Util from './../Common/util';
@@ -22,6 +24,7 @@ var dataTest=require('./../data/cart.json');
 import GoodsGoods from './goodsGoods';
 import GoodsDetail from './goodsDetail';
 import GoodsEvaluate from './goodsEvaluate';
+import KECart from './../Shop/KECart';
 var start=0;
 var timestamp=0
 class Goods extends Component {
@@ -35,7 +38,13 @@ class Goods extends Component {
 				  scrollEnabled:false,
 				  isShowDetail:false,
 				  isShowEvaluate:false,
-				  cartNum:0
+				  cartNum:0,
+				  rotation: new Animated.Value(0),
+				  top: new Animated.Value(0),
+				  left: new Animated.Value(0),
+				  width: new Animated.Value(0),
+				  height: new Animated.Value(0),
+				  joincart:true
 			}
 	  }
 	  render() {
@@ -52,7 +61,7 @@ class Goods extends Component {
 									  <TouchableOpacity activeOpacity={1} onPress={()=>this.scrollToView(1)} style={styles.navItemsView}><Text style={[{color:"#9b9b9b"},styles.textOne]}>详情</Text></TouchableOpacity>
 										<TouchableOpacity activeOpacity={1} onPress={()=>this.scrollToView(2)} style={styles.navItemsView}><Text style={[{color:"#9b9b9b"},styles.textOne]}>评价</Text></TouchableOpacity>
 									  <Animated.View
-											  style={[styles.animateLine,{transform: [{translateX: this.state.fadeAnim}, ]}]}>
+											  style={[styles.animateLine,{transform: [{translateX: this.state.fadeAnim},]}]}>
 									  </Animated.View>
 								</View>
 						  </View>
@@ -83,18 +92,56 @@ class Goods extends Component {
 							</View>:null}
 						  {/*详情页底部*/}
 						  <View style={styles.bottomCommon}>
-								<TouchableOpacity style={styles.goCart}>
+								<TouchableOpacity style={styles.goCart} onPress={()=>Util._jumpFocus(this.props.navigator,KECart)}>
 								    <Image source={{uri:"tabbar_cart"}} style={{width:18,height:18,marginTop:4}}/>
 									  <Text style={styles.textB}>购物车</Text>
 									  <View style={styles.cartNum}><Text style={styles.textC}>{this.state.cartNum}</Text></View>
 								</TouchableOpacity>
-								<TouchableOpacity style={styles.joinCart}>
+								<TouchableOpacity style={styles.joinCart} onPress={()=>this.joinCart()}>
 									  <Text style={styles.textA}>加入购物车</Text>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.goBuy}>
-									  <Text style={styles.textA}>立即购买</Text>
+									  <Text style={styles.textA} onPress={()=>this.buyNow()}>立即购买</Text>
 								</TouchableOpacity>
 						  </View>
+						  {/*<View style={styles.level}>
+						       <View style={styles.joinOpe}>
+
+							   </View>
+						  </View>*/}
+						  {/* {!this.state.joincart&&
+								<Animated.Image source={{uri:"http://192.168.1.176/images/goods/20160614/mthumb_d41ca01a89af2eb2c9b275a24f2edc65210615owq2cv.jpg"}} style={{
+											position:'absolute',
+											width: this.state.width.interpolate({
+														inputRange: [0, 1],
+														outputRange: [300,10]
+												  }),
+
+											height: this.state.height.interpolate({
+														inputRange: [0, 1],
+														outputRange: [300,10]
+												  }),
+											transform: [{
+												  rotateZ: this.state.rotation.interpolate({
+														inputRange: [0, 1],
+														outputRange: ['0deg', '720deg']
+												  })
+											},
+											{
+											translateX: this.state.left.interpolate({
+														inputRange: [0, 1],
+														outputRange: [Util.size.width*0.25,62]
+												  })
+											},
+											{
+											translateY: this.state.top.interpolate({
+														inputRange: [0, 1],
+														outputRange: [0,Util.size.height-60]
+												  })
+											}
+											]
+										}}>
+								</Animated.Image>}*/}
 					</View>
 			);
 
@@ -111,8 +158,6 @@ class Goods extends Component {
 			Util.get(formData, function (data) {
 				  if (data.flag > 0) {
 						var num=data.data.comment.length;
-
-						console.log(data)
 						self.setState({
 							  isShow:true,
 							  cartNum:data.data.cartGoodsNum,
@@ -121,12 +166,10 @@ class Goods extends Component {
 							  comment:data.data.comment,
 							  num:num
 						})
-						console.log(num)
 						if(num>0){
 							  self.setState({
 									goodsFirstComment: data.data.comment[0]
 							  })
-
 						}
 						self.setState({
 							  isShow:true})
@@ -144,8 +187,6 @@ class Goods extends Component {
 			start=e.nativeEvent.contentOffset.y;
 	  }
 	  ScrollGoodsEnd(e){
-			console.log(start)
-			console.log(e.nativeEvent.contentOffset.y&&start!=0)
 			if(Math.round(e.nativeEvent.contentOffset.y)==Math.round(start)){
 				  this.scrollToView(1)
 			}
@@ -162,7 +203,7 @@ class Goods extends Component {
 			var offsetLeft=Math.round(e.nativeEvent.contentOffset.x);
 			var width=Math.round(screenWidth)
 			var currentPage=Math.floor(offsetLeft/width);
-			var value=6+50*currentPage
+			var value=6+50*currentPage;
 			Animated.timing(
 					this.state.fadeAnim,
 					{toValue:value ,
@@ -221,6 +262,91 @@ class Goods extends Component {
 
 			}
 	  }
+	  //加入购物车
+	  joinCart(){
+			var self = this;
+			/*if(!self.state.joincart){
+				  return;
+			}
+			self.setState({
+				  joincart:false
+			});*/
+
+			let formData = new FormData();
+			formData.append("act", "addCartGoods");
+			formData.append("goods_id", this.props.id);
+			formData.append("number", "1");
+			Util.get(formData, function (data) {
+				  if (data.flag) {
+						     /* self.startAnimate();
+                               setTimeout(function(){
+
+									 self.setState({
+										   cartNum: data.data.number,
+										   joincart:true
+									 })
+							   },2350);*/
+                        let numberCart=data.data.number;
+						self.setState({
+							  cartNum: numberCart
+						})
+						Util.setStorage("cartNum",numberCart+"")
+						if(self.props.badge){
+
+							  self.props.badge(numberCart)
+						}
+
+				  }else{
+						Util.toast("加入购物车失败")
+				  }
+			}, function (err) {
+			})
+	  }
+/*	  startAnimate(){
+			let timing = Animated.timing;
+			Animated.sequence([
+				  Animated.parallel([ 'rotation'].map(property =>{
+						return timing(this.state[property], {
+							  toValue: 1,
+							  duration: 1500,
+							  easing: Easing.linear
+						});
+				  })),
+				  Animated.delay(200),
+				  Animated.parallel([ 'top','left','width','height'].map(property =>{
+						return timing(this.state[property], {
+							  toValue: 1,
+							  duration: 600,
+							  easing: Easing.easeOutQuad
+						});
+				  })),
+				  Animated.parallel([ 'top','left','width','height', 'rotation'].map(property=>{
+						return timing(this.state[property], {
+							  toValue:0,
+							  duration:0
+						})
+				  }))
+
+			]).start();
+	  }*/
+	  buyNow(){
+			var self = this;
+			let formData = new FormData();
+			formData.append("act", "addCartGoods");
+			formData.append("goods_id", this.props.id);
+			formData.append("number", 1);
+			Util.get(formData, function (data) {
+				  if (data.flag > 0) {
+						Util.setStorage("cartNum",data.data.number)
+						Util._jumpFocus(self.props.navigator,KECart);
+
+				  }else{
+						Util.toast("加入购物车失败")
+				  }
+
+			}, function (err) {
+			})
+	  }
 }
 const styles = StyleSheet.create({
 	  container: {
@@ -246,6 +372,11 @@ const styles = StyleSheet.create({
 			position:'absolute',
 			left:0,
 			zIndex:2
+	  },
+	  animateImg:{
+			width:0,
+			height:0,
+			position:'absolute'
 	  },
 	  leftViewStyle:{
 			width:Platform.OS==='ios'?28:24,
@@ -328,8 +459,7 @@ const styles = StyleSheet.create({
 	  },
 	  textA:{
 			color:"#fff",
-			fontSize:14,
-
+			fontSize:14
 	  },
 	  textB:{
 			color:"#999",
@@ -348,6 +478,24 @@ const styles = StyleSheet.create({
 	  textC:{
 			color:"#fff",
 			fontSize:10
+	  },
+	  level:{
+			backgroundColor:"rgba(0,0,0,0.3)",
+			width:Util.size.width,
+			height:Util.size.height,
+			position:'absolute',
+			left:0,
+			bottom:0,
+			zIndex:10
+	  },
+	  joinOpe:{
+			position:'absolute',
+			left:0,
+			bottom:0,
+			width:Util.size.width,
+			height:200,
+			backgroundColor:'#fff',
+			paddingBottom:20
 	  }
 });
 module.exports=Goods;

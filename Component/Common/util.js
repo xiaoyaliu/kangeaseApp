@@ -36,7 +36,6 @@ module.exports = {
 			let Url="http://192.168.1.176/appClientApi/controlApi.php";
 			fetch(Url,
 					{method: 'POST',
-						  headers: {},
 						  body: formData}
 			).then((response) => response.text())
 
@@ -80,10 +79,21 @@ module.exports = {
 			console.log(name,value)
 	  },
 	  getStorage:function(key){
+			return new Promise((resolve,reject)=>{
 			AsyncStorage.getItem(key,(error,res)=>{
-				  return res
-			})
+				  if (!error) {
+						try {
+							  resolve(res);
+						} catch (e) {
+							  reject(error);
+						}
+				  }else {
+						reject(error);
+				  }
+			});
+			});
 	  },
+
 	  removeStorage:function(key){
 			AsyncStorage.removeItem(key,(error,res)=>{
 				  if(!error){
@@ -92,13 +102,23 @@ module.exports = {
 			})
 	  },
 	  quit:function(navigator,component){
-			AsyncStorage.removeItem("username",(error,res)=>{
-				  if(!error){
-						this._jumpFocus(navigator,component)
-				  }else{
+			var that=this;
+			let formData = new FormData();
+			formData.append("act","userLogout");
+			this.get(formData,function(data){
+                if(data.flag){
+					  AsyncStorage.removeItem("username",(error,res)=>{
+							if(!error){
+								  that._jumpFocus(navigator,component)
+							}else{
 
-				  }
+							}
+					  })
+				}
+			},function(){
+
 			})
+
 	  },
 	  toast:function(mag){
 			Toast.show(mag, {
