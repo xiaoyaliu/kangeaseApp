@@ -15,10 +15,10 @@ import {
         Alert
         } from 'react-native';
 
-import LaunchPage from './Component/Main/KELauchpage'
-//import LaunchPage from './Component/Common/addressLink'
-//import KEMain from './Component/Common/addressLink'
-import KEMain from './Component/Main/KEMain'
+//import LaunchPage from './Component/Main/KELauchpage'
+import LaunchPage from './Component/Shop/uploadId'
+import KEMain from './Component/Shop/uploadId'
+//import KEMain from './Component/Main/KEMain'
 import Util from './Component/Common/util'
 class XMGStart extends Component{
       constructor(props){
